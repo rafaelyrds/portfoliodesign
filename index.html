@@ -104,34 +104,8 @@
   /* ---------- Hero / Apresentação ---------- */
   .hero{
     padding:clamp(72px,12vw,148px) 0 clamp(56px,8vw,96px);
-    position:relative;overflow:hidden;
     text-align:center;
   }
-  .hero-orb{
-    position:absolute;border-radius:50%;
-    filter:blur(80px);opacity:.18;
-    pointer-events:none;will-change:transform;
-  }
-  .hero-orb-1{
-    width:clamp(300px,55vw,680px);height:clamp(300px,55vw,680px);
-    background:var(--purple);top:-20%;left:-10%;
-    animation:orbFloat1 14s ease-in-out infinite;
-  }
-  .hero-orb-2{
-    width:clamp(240px,45vw,560px);height:clamp(240px,45vw,560px);
-    background:var(--green);bottom:-10%;right:-5%;
-    animation:orbFloat2 17s ease-in-out infinite;
-  }
-  .hero-orb-3{
-    width:clamp(160px,28vw,340px);height:clamp(160px,28vw,340px);
-    background:var(--purple-deep);top:30%;left:55%;
-    animation:orbFloat3 11s ease-in-out infinite;
-    opacity:.1;
-  }
-  @keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6%,8%) scale(1.06)}}
-  @keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-7%,-6%) scale(1.08)}}
-  @keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,10%) scale(.94)}}
-  [data-theme="dark"] .hero-orb{opacity:.22}
   .hero .label{margin-bottom:1.6rem;display:inline-flex;align-items:center;gap:.6rem}
   .hero .label .av{width:7px;height:7px;border-radius:50%;background:var(--green);
     box-shadow:0 0 0 0 var(--green);animation:pulse 2.6s infinite}
@@ -353,9 +327,6 @@
 
   <!-- APRESENTAÇÃO (primeiro) -->
   <section class="hero wrap">
-    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
-    <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
     <span class="label"><span class="av"></span><span data-i18n="badge">Disponível para projetos</span></span>
     <h1 data-i18n="heroTitle"></h1>
     <p class="sub" data-i18n="heroSub"></p>
@@ -479,7 +450,7 @@
   const i18n = {
     pt:{
       badge:"Disponível para novos projetos",
-      heroTitle:'Design que <span class="grad">fica na memória.</span><br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">por Rafaely Almeida</span>',
+      heroTitle:'Design que<br><span class="grad">fica na memória.</span><br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">por Rafaely Almeida</span>',
       heroSub:"Tudo que sua marca precisa pra <b>existir com consistência</b> em qualquer canal: identidade visual, campanhas, redes sociais, landing pages e peças offline.",
       navContact:"Entrar em contato",
       ctaWork:"Ver trabalhos", ctaTalk:"Falar comigo",
@@ -493,7 +464,7 @@
     },
     en:{
       badge:"Available for new projects",
-      heroTitle:'Design that <span class="grad">sticks with you.</span><br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">by Rafaely Almeida</span>',
+      heroTitle:'Design that<br><span class="grad">sticks with you.</span><br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">by Rafaely Almeida</span>',
       heroSub:"Graphic, web, identity, campaigns — I turn ideas into brands people actually remember. Let's make something together?",
       navContact:"Get in touch",
       ctaWork:"View work", ctaTalk:"Get in touch",
