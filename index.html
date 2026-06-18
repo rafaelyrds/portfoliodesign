@@ -71,7 +71,16 @@
   .brand{font-weight:800;font-size:1.12rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.55rem}
   .brand .dot{width:10px;height:10px;border-radius:50%;
     background:linear-gradient(135deg,var(--purple),var(--green))}
+  .brand .role{font-weight:400;font-size:.78rem;color:var(--muted);letter-spacing:0}
   .nav-right{display:flex;align-items:center;gap:.6rem}
+  .btn-contact-nav{
+    font-family:var(--font);font-size:.82rem;font-weight:600;cursor:pointer;
+    padding:.5rem 1.1rem;border-radius:100px;
+    border:1px solid var(--hairline);background:var(--surface);
+    color:var(--text);transition:all .25s var(--ease);
+    text-decoration:none;display:inline-flex;align-items:center;
+  }
+  .btn-contact-nav:hover{border-color:var(--purple);color:var(--purple)}
 
   .lang-toggle{display:flex;background:var(--surface-2);border-radius:100px;padding:3px;border:1px solid var(--hairline-soft)}
   .lang-toggle button{
@@ -199,8 +208,9 @@
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="brand"><span class="dot"></span>Rafaely Almeida</a>
+    <a href="#top" class="brand"><span class="dot"></span>Rafaely Almeida<span class="role">Brand designer</span></a>
     <div class="nav-right">
+      <a href="#contato" class="btn-contact-nav" data-i18n="navContact">Entrar em contato</a>
       <div class="lang-toggle" role="group" aria-label="Idioma / Language">
         <button id="lang-pt" class="active" onclick="setLang('pt')">PT</button>
         <button id="lang-en" onclick="setLang('en')">EN</button>
@@ -279,16 +289,18 @@
   const i18n = {
     pt:{
       badge:"Disponível para novos projetos",
-      heroTitle:'Olá, sou Rafaely Almeida.<br>Design que <span class="grad">fica na memória</span>.',
+      heroTitle:'Design que <span class="grad">fica na memória</span>.<br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">por Rafaely Almeida</span>',
       heroSub:"Gráfico, web, identidades, campanhas — transformo ideias em marcas que as pessoas realmente lembram. Vamos criar algo juntos?",
+      navContact:"Entrar em contato",
       ctaWork:"Ver trabalhos", ctaTalk:"Falar comigo",
       workTitle:"Trabalhos", contactPre:"Bora", contactHi:"criar algo juntos?",
       countSuffix:{one:"projeto",many:"projetos"}, saveBtn:"Ver"
     },
     en:{
       badge:"Available for new projects",
-      heroTitle:'Hi, I\'m Rafaely Almeida.<br>Design that <span class="grad">sticks with you</span>.',
+      heroTitle:'Design that <span class="grad">sticks with you</span>.<br><span style="font-size:.52em;font-weight:500;letter-spacing:-.01em;color:var(--text-soft)">by Rafaely Almeida</span>',
       heroSub:"Graphic, web, identity, campaigns — I turn ideas into brands people actually remember. Let's make something together?",
+      navContact:"Get in touch",
       ctaWork:"View work", ctaTalk:"Get in touch",
       workTitle:"Work", contactPre:"Let's", contactHi:"create something together?",
       countSuffix:{one:"project",many:"projects"}, saveBtn:"Open"
@@ -300,8 +312,6 @@
   let filter = "all";
 
   /* ---------- tema ---------- */
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if(prefersDark) document.documentElement.setAttribute("data-theme","dark");
   function toggleTheme(){
     const el=document.documentElement;
     el.setAttribute("data-theme", el.getAttribute("data-theme")==="dark"?"light":"dark");
