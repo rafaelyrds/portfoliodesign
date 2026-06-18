@@ -204,6 +204,51 @@
     .about-photo{aspect-ratio:3/2;max-height:300px}
   }
 
+  /* ---------- Overlay de projeto ---------- */
+  .proj-overlay{
+    position:fixed;inset:0;z-index:200;
+    display:flex;align-items:flex-end;justify-content:center;
+    background:rgba(0,0,0,0);pointer-events:none;
+    transition:background .35s var(--ease);
+  }
+  .proj-overlay.open{background:rgba(0,0,0,.55);pointer-events:all}
+  .proj-panel{
+    width:100%;max-width:860px;max-height:92vh;
+    background:var(--bg);border-radius:24px 24px 0 0;
+    overflow-y:auto;overscroll-behavior:contain;
+    transform:translateY(100%);transition:transform .42s var(--ease);
+    box-shadow:0 -8px 40px rgba(0,0,0,.18);
+  }
+  @media(min-width:700px){
+    .proj-overlay{align-items:center}
+    .proj-panel{border-radius:24px;max-height:88vh;margin:0 24px}
+  }
+  .proj-overlay.open .proj-panel{transform:translateY(0)}
+  .proj-header{
+    position:sticky;top:0;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 1.4rem;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline-soft);
+  }
+  .proj-header .proj-cat{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
+  .proj-close{
+    width:36px;height:36px;border-radius:50%;border:1px solid var(--hairline);
+    background:var(--surface);cursor:pointer;display:grid;place-items:center;
+    color:var(--text);font-size:1.1rem;line-height:1;transition:all .2s var(--ease);
+  }
+  .proj-close:hover{border-color:var(--text)}
+  .proj-body{padding:1.6rem 1.4rem 2.4rem}
+  .proj-body h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;margin-bottom:.7rem}
+  .proj-desc{font-size:1rem;color:var(--text-soft);line-height:1.7;max-width:60ch;margin-bottom:2rem}
+  .proj-images{display:flex;flex-direction:column;gap:1rem}
+  .proj-img-ph{
+    width:100%;border-radius:16px;overflow:hidden;
+    background:var(--surface-2);border:1px solid var(--hairline-soft);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-size:.82rem;font-weight:500;
+  }
+
   /* ---------- Contato / footer (placeholder, copy depois) ---------- */
   .contact{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:24px;padding:clamp(36px,6vw,72px);text-align:center;box-shadow:var(--shadow)}
   .contact h2{font-weight:800;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:-.025em;margin-bottom:1.4rem}
@@ -320,6 +365,21 @@
   </section>
 
 </main>
+
+<!-- OVERLAY DE PROJETO -->
+<div class="proj-overlay" id="projOverlay" role="dialog" aria-modal="true" aria-label="Detalhes do projeto">
+  <div class="proj-panel" id="projPanel">
+    <div class="proj-header">
+      <span class="proj-cat" id="projCat"></span>
+      <button class="proj-close" onclick="closeProject()" aria-label="Fechar">✕</button>
+    </div>
+    <div class="proj-body">
+      <h2 id="projTitle"></h2>
+      <p class="proj-desc" id="projDesc"></p>
+      <div class="proj-images" id="projImages"></div>
+    </div>
+  </div>
+</div>
 <footer><span>© 2026 Rafaely Almeida</span></footer>
 
 <script>
@@ -330,12 +390,42 @@
         g1..g6 = gradiente provisório; depois trocamos por "img".
      ===================================================================== */
   const projects = [
-    { title:{pt:"Marca Aurora",     en:"Aurora Brand"},   cat:"design", year:2025, ratio:"4/5",  art:"g1" },
-    { title:{pt:"Série Litoral",    en:"Coast Series"},   cat:"foto",   year:2025, ratio:"3/4",  art:"g2" },
-    { title:{pt:"Formas em repouso",en:"Forms at Rest"},  cat:"arte",   year:2024, ratio:"1/1",  art:"g3" },
-    { title:{pt:"Estúdio Vértice",  en:"Vertex Studio"},  cat:"design", year:2024, ratio:"4/3",  art:"g4" },
-    { title:{pt:"Ruído urbano",     en:"Urban Noise"},    cat:"foto",   year:2023, ratio:"3/5",  art:"g5" },
-    { title:{pt:"Coleção Pigmento", en:"Pigment Series"}, cat:"arte",   year:2023, ratio:"5/6",  art:"g6" },
+    {
+      title:{pt:"Marca Aurora", en:"Aurora Brand"},
+      cat:"design", year:2025, ratio:"4/5", art:"g1",
+      desc:{pt:"", en:""},
+      imgs:["g1","g2","g3"]
+    },
+    {
+      title:{pt:"Série Litoral", en:"Coast Series"},
+      cat:"foto", year:2025, ratio:"3/4", art:"g2",
+      desc:{pt:"", en:""},
+      imgs:["g2","g4"]
+    },
+    {
+      title:{pt:"Formas em repouso", en:"Forms at Rest"},
+      cat:"arte", year:2024, ratio:"1/1", art:"g3",
+      desc:{pt:"", en:""},
+      imgs:["g3","g5","g6"]
+    },
+    {
+      title:{pt:"Estúdio Vértice", en:"Vertex Studio"},
+      cat:"design", year:2024, ratio:"4/3", art:"g4",
+      desc:{pt:"", en:""},
+      imgs:["g4","g1"]
+    },
+    {
+      title:{pt:"Ruído urbano", en:"Urban Noise"},
+      cat:"foto", year:2023, ratio:"3/5", art:"g5",
+      desc:{pt:"", en:""},
+      imgs:["g5","g3","g2"]
+    },
+    {
+      title:{pt:"Coleção Pigmento", en:"Pigment Series"},
+      cat:"arte", year:2023, ratio:"5/6", art:"g6",
+      desc:{pt:"", en:""},
+      imgs:["g6","g4","g1"]
+    },
   ];
 
   /* Rótulos das categorias (PT/EN) */
@@ -453,6 +543,7 @@
             <span class="yr">${p.year}</span>
           </div>
         </div>`;
+      card.onclick=()=>openProject(p);
       grid.appendChild(card);
     });
     const n=list.length, suf=i18n[lang].countSuffix;
@@ -468,6 +559,37 @@
   document.querySelectorAll(".ob").forEach(el=>obIO.observe(el));
 
   /* ---------- init ---------- */
+  /* ---------- overlay projeto ---------- */
+  const overlay=document.getElementById("projOverlay");
+  const imgHeights=["aspect-ratio:4/5","aspect-ratio:3/2","aspect-ratio:16/9","aspect-ratio:1/1"];
+
+  function openProject(p){
+    document.getElementById("projCat").textContent=(catLabels[p.cat]?catLabels[p.cat][lang]:p.cat)+" · "+p.year;
+    document.getElementById("projTitle").textContent=p.title[lang];
+    document.getElementById("projDesc").innerHTML=p.desc[lang]||"";
+    document.getElementById("projDesc").style.display=p.desc[lang]?"":"none";
+    const box=document.getElementById("projImages");
+    box.innerHTML="";
+    p.imgs.forEach((g,i)=>{
+      const d=document.createElement("div");
+      d.className="proj-img-ph "+g;
+      d.style.cssText=imgHeights[i%imgHeights.length]+";min-height:180px";
+      d.textContent="";
+      box.appendChild(d);
+    });
+    overlay.classList.add("open");
+    document.body.style.overflow="hidden";
+    document.getElementById("projPanel").scrollTop=0;
+  }
+
+  function closeProject(){
+    overlay.classList.remove("open");
+    document.body.style.overflow="";
+  }
+
+  overlay.addEventListener("click",e=>{if(e.target===overlay)closeProject()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
+
   setLang("pt");
 </script>
 </body>
