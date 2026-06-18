@@ -208,20 +208,25 @@
   .proj-overlay{
     position:fixed;inset:0;z-index:200;
     display:flex;align-items:flex-end;justify-content:center;
-    background:rgba(0,0,0,0);pointer-events:none;
-    transition:background .35s var(--ease);
+    background:rgba(0,0,0,0);
+    visibility:hidden;pointer-events:none;
+    transition:background .35s var(--ease),visibility 0s .36s;
   }
-  .proj-overlay.open{background:rgba(0,0,0,.55);pointer-events:all}
+  .proj-overlay.open{
+    background:rgba(0,0,0,.6);
+    visibility:visible;pointer-events:all;
+    transition:background .35s var(--ease),visibility 0s 0s;
+  }
   .proj-panel{
-    width:100%;max-width:860px;max-height:92vh;
+    width:100%;max-height:96vh;
     background:var(--bg);border-radius:24px 24px 0 0;
     overflow-y:auto;overscroll-behavior:contain;
     transform:translateY(100%);transition:transform .42s var(--ease);
-    box-shadow:0 -8px 40px rgba(0,0,0,.18);
+    box-shadow:0 -8px 40px rgba(0,0,0,.22);
   }
   @media(min-width:700px){
-    .proj-overlay{align-items:center}
-    .proj-panel{border-radius:24px;max-height:88vh;margin:0 24px}
+    .proj-overlay{align-items:flex-end}
+    .proj-panel{max-width:1100px;max-height:94vh;border-radius:24px 24px 0 0;margin:0 auto}
   }
   .proj-overlay.open .proj-panel{transform:translateY(0)}
   .proj-header{
