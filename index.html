@@ -199,7 +199,34 @@
   .ob{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .ob.in{opacity:1;transform:none}
 
-  @media(max-width:520px){.lang-toggle button{padding:.3rem .55rem}.hero p.sub{font-size:1.05rem}}
+  /* ---------- Responsivo ---------- */
+  @media(max-width:760px){
+    .btn-contact-nav{display:none}
+  }
+  @media(max-width:600px){
+    .brand .role{display:none}
+    .nav{height:56px}
+    .hero{padding:clamp(36px,8vw,72px) 0 clamp(28px,5vw,48px)}
+    .hero h1{font-size:clamp(2rem,8vw,3rem);max-width:none}
+    .hero p.sub{font-size:1rem;margin-top:1.1rem}
+    .hero-actions{margin-top:1.6rem;flex-direction:column;align-items:flex-start}
+    .btn{width:100%;justify-content:center}
+    .section{padding:clamp(28px,5vw,56px) 0}
+    .sec-head{flex-direction:column;align-items:flex-start;gap:.3rem;margin-bottom:1.2rem}
+    .filters{gap:.4rem;margin-bottom:1.4rem}
+    .filter{font-size:.8rem;padding:.42rem .9rem}
+    .contact{border-radius:18px;padding:clamp(24px,5vw,48px) clamp(16px,4vw,32px)}
+    .contact h2{font-size:clamp(1.4rem,5.5vw,2rem)}
+    .contact .email{font-size:.88rem;padding:.75rem 1.2rem;word-break:break-all}
+    .contact .socials{gap:1rem}
+    footer{padding:2rem 0}
+  }
+  @media(max-width:400px){
+    .lang-toggle button{padding:.28rem .5rem;font-size:.72rem}
+    .theme-btn{width:32px;height:32px}
+    .theme-btn svg{width:15px;height:15px}
+    .masonry{columns:1}
+  }
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card,.ob{opacity:1;transform:none}}
   :focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
 </style>
