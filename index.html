@@ -186,6 +186,24 @@
   .g5{background:linear-gradient(135deg,#5A3DD1,#6D4DE6 50%,#3CE6A6)}
   .g6{background:radial-gradient(70% 70% at 70% 30%,#16B981,transparent 60%),linear-gradient(150deg,#6D4DE6,#23202E)}
 
+  /* ---------- Sobre ---------- */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+  .about-photo{border-radius:20px;overflow:hidden;aspect-ratio:4/5;
+    background:linear-gradient(140deg,#6D4DE6,#9B82FF 55%,#16B981);
+    box-shadow:var(--shadow)}
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .about-text .label{margin-bottom:1.2rem;display:inline-flex;align-items:center;gap:.6rem}
+  .about-text h2{font-weight:800;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-.025em;margin-bottom:1.2rem;line-height:1.1}
+  .about-text p{color:var(--text-soft);font-size:1.05rem;line-height:1.7;margin-bottom:1rem}
+  .about-text p:last-of-type{margin-bottom:1.6rem}
+  .about-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .about-tag{font-size:.78rem;font-weight:600;padding:.38rem .85rem;border-radius:100px;
+    border:1px solid var(--hairline);color:var(--text-soft);background:var(--surface)}
+  @media(max-width:760px){
+    .about{grid-template-columns:1fr}
+    .about-photo{aspect-ratio:3/2;max-height:300px}
+  }
+
   /* ---------- Contato / footer (placeholder, copy depois) ---------- */
   .contact{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:24px;padding:clamp(36px,6vw,72px);text-align:center;box-shadow:var(--shadow)}
   .contact h2{font-weight:800;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:-.025em;margin-bottom:1.4rem}
@@ -264,6 +282,22 @@
     </div>
   </section>
 
+  <!-- SOBRE -->
+  <section class="section wrap" id="sobre">
+    <div class="about ob">
+      <div class="about-photo">
+        <!-- troque pelo caminho da sua foto: <img src="foto.jpg" alt="Rafaely Almeida"> -->
+      </div>
+      <div class="about-text">
+        <span class="label" data-i18n="aboutLabel"></span>
+        <h2 data-i18n="aboutTitle"></h2>
+        <p data-i18n="aboutP1"></p>
+        <p data-i18n="aboutP2"></p>
+        <div class="about-tags" id="about-tags"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- TRABALHOS (masonry estilo Pinterest) -->
   <section class="section wrap" id="trabalhos">
     <div class="sec-head">
@@ -321,6 +355,10 @@
       heroSub:"Tudo que sua marca precisa pra <b>existir com consistência</b> em qualquer canal: identidade visual, campanhas, redes sociais, landing pages e peças offline.",
       navContact:"Entrar em contato",
       ctaWork:"Ver trabalhos", ctaTalk:"Falar comigo",
+      aboutLabel:"Sobre mim",
+      aboutTitle:"Design com propósito,<br>entregue com cuidado.",
+      aboutP1:"Sou Rafaely Almeida, Brand Designer com olho treinado pra construir marcas que se destacam — e ficam. Trabalho com empresas e profissionais que querem sair do genérico e criar uma presença visual que realmente comunica quem elas são.",
+      aboutP2:"Do briefing à entrega, cuido de cada detalhe. Acredito que bom design não é só bonito: ele é estratégico, consistente e faz sentido pra quem o vê.",
       workTitle:"Trabalhos", contactPre:"Vamos", contactHi:"conversar?",
       contactBtn:"Entrar em contato",
       countSuffix:{one:"projeto",many:"projetos"}, saveBtn:"Ver"
@@ -331,6 +369,10 @@
       heroSub:"Graphic, web, identity, campaigns — I turn ideas into brands people actually remember. Let's make something together?",
       navContact:"Get in touch",
       ctaWork:"View work", ctaTalk:"Get in touch",
+      aboutLabel:"About me",
+      aboutTitle:"Design with purpose,<br>delivered with care.",
+      aboutP1:"I'm Rafaely Almeida, a Brand Designer with a trained eye for building brands that stand out — and stick. I work with businesses and professionals who want to move beyond generic and build a visual presence that truly communicates who they are.",
+      aboutP2:"From brief to delivery, I take care of every detail. I believe great design isn't just beautiful — it's strategic, consistent, and meaningful to whoever sees it.",
       workTitle:"Work", contactPre:"Let's", contactHi:"talk?",
       contactBtn:"Get in touch",
       countSuffix:{one:"project",many:"projects"}, saveBtn:"Open"
@@ -357,7 +399,24 @@
       const v=i18n[l][el.dataset.i18n];
       if(v!=null) el.innerHTML=v;
     });
-    renderFilters(); renderGrid();
+    renderFilters(); renderGrid(); renderTags(l);
+  }
+
+  /* ---------- tags sobre ---------- */
+  const tags = {
+    pt:["Identidade Visual","Branding","Design Gráfico","Web Design","Campanhas","Redes Sociais","Landing Pages","Peças Offline"],
+    en:["Visual Identity","Branding","Graphic Design","Web Design","Campaigns","Social Media","Landing Pages","Offline Materials"]
+  };
+  function renderTags(l){
+    const box=document.getElementById("about-tags");
+    if(!box) return;
+    box.innerHTML="";
+    tags[l].forEach(t=>{
+      const s=document.createElement("span");
+      s.className="about-tag";
+      s.textContent=t;
+      box.appendChild(s);
+    });
   }
 
   /* ---------- filtros ---------- */
