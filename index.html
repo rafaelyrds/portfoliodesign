@@ -273,8 +273,46 @@
   .contact .socials a:hover{color:var(--purple)}
   footer{padding:3rem 0;text-align:center;color:var(--muted);font-size:.85rem}
 
-  .ob{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  /* ---------- Animações de entrada (scroll reveal) ---------- */
+  .ob{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
   .ob.in{opacity:1;transform:none}
+
+  /* Hero — entrada escalonada no load */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  .hero .label{animation:fadeUp .6s var(--ease) .1s both}
+  .hero h1{animation:fadeUp .7s var(--ease) .22s both}
+  .hero p.sub{animation:fadeUp .7s var(--ease) .38s both}
+  .hero-actions{animation:fadeUp .7s var(--ease) .52s both}
+
+  /* About — foto da esquerda, texto da direita */
+  .about-photo{opacity:0;transform:translateX(-28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .about-photo.in{opacity:1;transform:none}
+  .about-text{opacity:0;transform:translateX(28px);transition:opacity .7s var(--ease) .1s,transform .7s var(--ease) .1s}
+  .about-text.in{opacity:1;transform:none}
+
+  /* Tags — escalonadas */
+  .about-tag{opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+  .about-tag.in{opacity:1;transform:none}
+
+  /* Cards — zoom na imagem ao hover */
+  .card .art{overflow:hidden}
+  .card .art > *,.card .art{transition:transform .5s var(--ease)}
+  .card:hover .art{transform:scale(1.02)}
+
+  /* Botões — press feedback */
+  .btn:active{transform:scale(.97)!important}
+  .filter:active{transform:scale(.95)}
+
+  /* Filtros — entrada escalonada */
+  .filter{opacity:0;transform:translateY(6px);transition:opacity .35s var(--ease),transform .35s var(--ease),border-color .25s var(--ease),color .25s var(--ease),background .25s var(--ease)}
+  .filter.in{opacity:1;transform:none}
+
+  /* Nav — dot pulsa ao hover na brand */
+  .brand:hover .dot{animation:none;transform:scale(1.3);transition:transform .2s var(--ease)}
+
+  /* Seção de contato */
+  .contact{transition:box-shadow .4s var(--ease)}
+  .contact:hover{box-shadow:0 8px 40px rgba(109,77,230,.1),0 2px 8px rgba(0,0,0,.04)}
 
   /* ---------- Responsivo ---------- */
   @media(max-width:760px){
@@ -564,14 +602,46 @@
     const n=list.length, suf=i18n[lang].countSuffix;
     document.getElementById("count").textContent=
       String(n).padStart(2,"0")+" "+(n===1?suf.one:suf.many);
-    requestAnimationFrame(()=>document.querySelectorAll(".card").forEach(c=>obIO.observe(c)));
+    requestAnimationFrame(()=>{
+      document.querySelectorAll(".card").forEach(c=>obIO.observe(c));
+      observeFilters();
+    });
   }
 
   /* ---------- reveal ---------- */
   const obIO=new IntersectionObserver(es=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");obIO.unobserve(e.target);}});
-  },{threshold:.12});
+  },{threshold:.1});
   document.querySelectorAll(".ob").forEach(el=>obIO.observe(el));
+
+  /* about — foto e texto deslizam de lados opostos */
+  const abIO=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");abIO.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll(".about-photo,.about-text").forEach(el=>abIO.observe(el));
+
+  /* tags — escalonadas */
+  const tagIO=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll(".about-tag").forEach((t,i)=>{
+          t.style.transitionDelay=(i*.04)+"s";
+          t.classList.add("in");
+        });
+        tagIO.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+  const tagsEl=document.getElementById("about-tags");
+  if(tagsEl) tagIO.observe(tagsEl);
+
+  /* filtros — escalonados */
+  function observeFilters(){
+    document.querySelectorAll(".filter").forEach((f,i)=>{
+      f.style.transitionDelay=(i*.06)+"s";
+      obIO.observe(f);
+    });
+  }
 
   /* ---------- init ---------- */
   /* ---------- overlay projeto ---------- */
