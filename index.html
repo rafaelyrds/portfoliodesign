@@ -191,9 +191,15 @@
 
   /* ---------- Sobre ---------- */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
-  .about-photo{border-radius:20px;overflow:hidden;aspect-ratio:4/5;
-    background:linear-gradient(140deg,#6D4DE6,#9B82FF 55%,#16B981);
-    box-shadow:var(--shadow)}
+  .about-photo{
+    border-radius:22px;aspect-ratio:4/5;
+    background:linear-gradient(140deg,var(--purple),var(--green));
+    padding:3px;box-shadow:var(--shadow);
+  }
+  .about-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    border-radius:19px;
+  }
   .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
   .about-text .label{margin-bottom:1.2rem;display:inline-flex;align-items:center;gap:.6rem}
   .about-text h2{font-weight:800;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-.025em;margin-bottom:1.2rem;line-height:1.1}
@@ -340,7 +346,7 @@
   <section class="section wrap" id="sobre">
     <div class="about ob">
       <div class="about-photo">
-        <!-- troque pelo caminho da sua foto: <img src="foto.jpg" alt="Rafaely Almeida"> -->
+        <img src="foto-sobremim.jpg" alt="Rafaely Almeida">
       </div>
       <div class="about-text">
         <span class="label" data-i18n="aboutLabel"></span>
