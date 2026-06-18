@@ -322,8 +322,11 @@
     .about-text{transform:translateX(0)!important}
   }
   @media(max-width:600px){
-    /* estrutura — mais respiro lateral */
-    .wrap{padding:0 36px}
+    /* respiro lateral — aplicado direto no main e header */
+    main{padding:0 28px}
+    .wrap{padding-left:0;padding-right:0}
+    header .nav{padding:0 28px}
+    footer{padding:2rem 28px}
     .nav{height:56px}
     .brand .role{display:none}
 
