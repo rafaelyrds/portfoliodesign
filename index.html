@@ -202,28 +202,19 @@
   .g6{background:radial-gradient(70% 70% at 70% 30%,#16B981,transparent 60%),linear-gradient(150deg,#6D4DE6,#23202E)}
 
   /* ---------- Sobre ---------- */
-  .about{display:grid;grid-template-columns:0.65fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
-  .about-photo{
-    border-radius:22px;aspect-ratio:4/5;
-    background:linear-gradient(140deg,var(--purple),var(--green));
-    padding:3px;box-shadow:var(--shadow);
-  }
-  .about-photo img{
-    width:100%;height:100%;object-fit:cover;display:block;
-    border-radius:19px;
-  }
-  .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
-  .about-text .label{margin-bottom:1.2rem;display:inline-flex;align-items:center;gap:.6rem}
-  .about-text h2{font-weight:800;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-.025em;margin-bottom:1.2rem;line-height:1.1}
-  .about-text p{color:var(--text-soft);font-size:1.05rem;line-height:1.7;margin-bottom:1rem}
-  .about-text p:last-of-type{margin-bottom:1.6rem}
-  .about-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-  .about-tag{font-size:.78rem;font-weight:600;padding:.38rem .85rem;border-radius:100px;
-    border:1px solid var(--hairline);color:var(--text-soft);background:var(--surface)}
-  @media(max-width:760px){
-    .about{grid-template-columns:1fr}
-    .about-photo{aspect-ratio:3/2;max-height:300px}
-  }
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;overflow:hidden;border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}
+  .about-text{padding:clamp(24px,3.5vw,40px);display:flex;flex-direction:column;justify-content:center;gap:0}
+  .about-accent{width:28px;height:3px;background:linear-gradient(90deg,var(--purple),var(--green));border-radius:2px;margin-bottom:.9rem}
+  .about-text .label{margin-bottom:.5rem;display:inline-flex;align-items:center;gap:.6rem}
+  .about-text h2{font-weight:800;font-size:clamp(1.35rem,2.6vw,1.9rem);letter-spacing:-.025em;margin-bottom:.9rem;line-height:1.15}
+  .about-text p{color:var(--text-soft);font-size:.95rem;line-height:1.65;margin-bottom:.8rem}
+  .about-text p:last-of-type{margin-bottom:1.2rem}
+  .about-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .about-tag{font-size:.75rem;font-weight:600;padding:.3rem .75rem;border-radius:100px;
+    border:1px solid var(--hairline);color:var(--text-soft);background:var(--bg)}
+  .about-photo{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--purple),var(--green));padding:0;border-radius:0;box-shadow:none;aspect-ratio:unset;min-height:100%}
+  .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:0}
+  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--purple) 18%,transparent) 0%,transparent 55%);pointer-events:none}
 
   /* ---------- Overlay de projeto ---------- */
   .proj-overlay{
@@ -296,11 +287,11 @@
   .hero p.sub{animation:fadeUp .7s var(--ease) .38s both}
   .hero-actions{animation:fadeUp .7s var(--ease) .52s both}
 
-  /* About — foto da esquerda, texto da direita */
-  .about-photo{opacity:0;transform:translateX(-28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .about-photo.in{opacity:1;transform:none}
-  .about-text{opacity:0;transform:translateX(28px);transition:opacity .7s var(--ease) .1s,transform .7s var(--ease) .1s}
+  /* About — texto esquerda entra, foto direita aparece */
+  .about-text{opacity:0;transform:translateX(-24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .about-text.in{opacity:1;transform:none}
+  .about-photo{opacity:0;transition:opacity .8s var(--ease) .15s}
+  .about-photo.in{opacity:1}
 
   /* Tags — escalonadas */
   .about-tag{opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
@@ -329,9 +320,9 @@
   /* ---------- Responsivo ---------- */
   @media(max-width:760px){
     .btn-contact-nav{display:none}
-    .about{grid-template-columns:1fr;gap:28px}
-    .about-photo{aspect-ratio:4/3;max-height:260px}
-    .about-text{transform:translateX(0)!important}
+    .about{grid-template-columns:1fr;border-radius:16px}
+    .about-photo{min-height:260px;aspect-ratio:4/3}
+    .about-photo img{object-position:top center}
   }
   @media(max-width:600px){
     /* respiro lateral — aplicado direto no main e header */
@@ -368,9 +359,8 @@
     .card .meta .cat,.card .meta .yr{font-size:.8rem}
 
     /* sobre */
-    .about{gap:24px}
-    .about-photo{aspect-ratio:4/3;max-height:240px;border-radius:18px}
-    .about-photo img{border-radius:15px}
+    .about{border-radius:14px}
+    .about-text{padding:24px 20px}
     .about-text h2{font-size:1.6rem}
     .about-text p{font-size:1rem;line-height:1.65}
     .about-tags{gap:.4rem}
@@ -429,15 +419,16 @@
   <!-- SOBRE -->
   <section class="section wrap" id="sobre">
     <div class="about ob">
-      <div class="about-photo">
-        <img src="foto-sobremim.jpg" alt="Rafaely Almeida">
-      </div>
       <div class="about-text">
+        <div class="about-accent"></div>
         <span class="label" data-i18n="aboutLabel"></span>
         <h2 data-i18n="aboutTitle"></h2>
         <p data-i18n="aboutP1"></p>
         <p data-i18n="aboutP2"></p>
         <div class="about-tags" id="about-tags"></div>
+      </div>
+      <div class="about-photo">
+        <img src="foto-sobremim.jpg" alt="Rafaely Almeida">
       </div>
     </div>
   </section>
