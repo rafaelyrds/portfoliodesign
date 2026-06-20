@@ -260,6 +260,7 @@
   .proj-body h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;margin-bottom:.7rem}
   .proj-desc{font-size:1rem;color:var(--text-soft);line-height:1.7;max-width:60ch;margin-bottom:2rem}
   .proj-images{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+  .proj-images.stack{grid-template-columns:1fr}
   .proj-img-ph{
     width:100%;border-radius:12px;overflow:hidden;
     background:var(--surface-2);border:1px solid var(--hairline-soft);
@@ -496,7 +497,7 @@
     },
     {
       title:{pt:"Igreja Batista Mais 500", en:"Igreja Batista Mais 500"},
-      cat:"identidade", year:2026, ratio:"4/3",
+      cat:"identidade", year:2026, ratio:"4/3", imgLayout:"stack",
       img:"Trabalhos - Identidade Visual - Igreja Batista Mais 500/Mais500 - capa.jpg",
       desc:{pt:"", en:""},
       imgs:[
@@ -740,6 +741,7 @@
     document.getElementById("projDesc").innerHTML=p.desc[lang]||"";
     document.getElementById("projDesc").style.display=p.desc[lang]?"":"none";
     const box=document.getElementById("projImages");
+    box.className="proj-images"+(p.imgLayout==="stack"?" stack":"");
     box.innerHTML="";
     p.imgs.forEach((src,i)=>{
       const d=document.createElement("div");
