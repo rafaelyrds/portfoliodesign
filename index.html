@@ -717,7 +717,9 @@
 
   /* ---------- filtros ---------- */
   function renderFilters(){
-    const cats=["all",...new Set(projects.map(p=>p.cat))];
+    const catOrder=["all","identidade","campanhas","redes","email","landingpage","outros"];
+    const usedCats=new Set(projects.map(p=>p.cat));
+    const cats=catOrder.filter(c=>c==="all"||usedCats.has(c));
     const box=document.getElementById("filters");
     box.innerHTML="";
     cats.forEach(c=>{
