@@ -119,10 +119,14 @@
   }
   .hero::before{top:0}
   .hero::after{bottom:0}
-  .hero .label{margin-bottom:1.6rem;display:inline-flex;align-items:center;gap:.6rem}
-  .hero .label .av{width:7px;height:7px;border-radius:50%;background:var(--green);
-    box-shadow:0 0 0 0 var(--green);animation:pulse 2.6s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--green) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .hero .label{
+    margin-bottom:1.6rem;display:inline-flex;align-items:center;gap:.55rem;
+    padding:.42rem .95rem;border-radius:100px;
+    border:1px solid color-mix(in srgb,var(--green) 28%,transparent);
+    background:color-mix(in srgb,var(--green) 7%,transparent);
+    color:var(--green-deep);font-size:.78rem;letter-spacing:.01em;text-transform:none;
+  }
+  .hero .label .av{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
   .hero h1{
     font-weight:800;font-size:clamp(2.5rem,7.5vw,5.6rem);line-height:1.02;
     letter-spacing:-.03em;max-width:20ch;margin:0 auto;
@@ -133,6 +137,29 @@
   }
   .hero p.sub{margin-top:1.6rem;max-width:52ch;font-size:1.18rem;color:var(--text-soft);line-height:1.55;margin-left:auto;margin-right:auto}
   .hero-actions{margin-top:2.4rem;display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+
+  /* ---------- Carrossel de marcas ---------- */
+  .brands{
+    margin-top:clamp(48px,7vw,80px);position:relative;overflow:hidden;
+    mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+  }
+  .brands-track{display:flex;width:max-content;align-items:center;gap:clamp(40px,6vw,80px);animation:brandSlide 32s linear infinite}
+  .brands:hover .brands-track{animation-play-state:paused}
+  @keyframes brandSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .brand-logo{
+    height:clamp(28px,3.4vw,40px);width:auto;flex-shrink:0;
+    filter:grayscale(1) opacity(.42);transition:filter .3s var(--ease);
+  }
+  .brands:hover .brand-logo{filter:grayscale(1) opacity(.55)}
+  [data-theme="dark"] .brand-logo{filter:grayscale(1) invert(1) opacity(.4)}
+  [data-theme="dark"] .brands:hover .brand-logo{filter:grayscale(1) invert(1) opacity(.55)}
+  .brand-ph{
+    height:clamp(28px,3.4vw,40px);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    padding:0 1.1rem;border:1px dashed var(--hairline);border-radius:8px;
+    font-size:.82rem;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:.01em;
+  }
+  @media(prefers-reduced-motion:reduce){.brands-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}}
   .btn{
     font-family:var(--font);font-weight:600;font-size:.98rem;cursor:pointer;
     padding:.85rem 1.5rem;border-radius:100px;border:1px solid transparent;
@@ -415,6 +442,9 @@
       <a href="#trabalhos" class="btn btn-primary" data-i18n="ctaWork"></a>
       <a href="#contato" class="btn btn-ghost" data-i18n="ctaTalk"></a>
     </div>
+    <div class="brands" aria-label="Marcas com quem já trabalhei">
+      <div class="brands-track" id="brandsTrack"></div>
+    </div>
   </section>
 
   <!-- SOBRE -->
@@ -633,6 +663,43 @@
     },
   ];
 
+  /* ---------------------------------------------------------------------
+     MARCAS DO CARROSSEL (hero)
+     Para usar o logo real: troque `ph:"Nome"` por `img:"logos/nome.svg"`.
+     Ideal: SVG ou PNG transparente, altura ~80px, monocromático.
+     --------------------------------------------------------------------- */
+  const brands = [
+    {name:"Quero Bolsa", ph:"Quero Bolsa"},
+    {name:"Swift", ph:"Swift"},
+    {name:"Igreja Batista Mais 500", ph:"Mais 500"},
+    {name:"Prosper", ph:"Prosper"},
+    {name:"LC Consultoria", ph:"LC Consultoria"},
+    {name:"Preparadão Enem", ph:"Preparadão Enem"},
+    {name:"Agência Maker Up", ph:"Maker Up"},
+  ];
+
+  function renderBrands(){
+    const track=document.getElementById("brandsTrack");
+    if(!track) return;
+    track.innerHTML="";
+    /* duas voltas da lista = loop sem emenda (a animação anda 50%) */
+    for(let pass=0; pass<2; pass++){
+      brands.forEach(b=>{
+        let el;
+        if(b.img){
+          el=document.createElement("img");
+          el.className="brand-logo"; el.src=b.img; el.alt=pass===0?b.name:"";
+          el.loading="lazy";
+        } else {
+          el=document.createElement("span");
+          el.className="brand-ph"; el.textContent=b.ph||b.name;
+        }
+        if(pass===1) el.setAttribute("aria-hidden","true");
+        track.appendChild(el);
+      });
+    }
+  }
+
   /* Rótulos das categorias (PT/EN) */
   const catLabels = {
     all:{pt:"Tudo",en:"All"},
@@ -845,6 +912,7 @@
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 
   setLang("pt");
+  renderBrands();
 </script>
 </body>
 </html>
