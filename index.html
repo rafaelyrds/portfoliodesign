@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rafaely Almeida — Portfólio</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%236D4DE6'/><stop offset='100%25' stop-color='%2316B981'/></linearGradient></defs><circle cx='16' cy='16' r='14' fill='url(%23g)'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23D8A649'/><stop offset='100%25' stop-color='%23DD073E'/></linearGradient></defs><circle cx='16' cy='16' r='14' fill='url(%23g)'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Inter serve de fallback caso o sistema não seja Apple; em Mac/iPhone o SF Pro entra automaticamente -->
@@ -18,19 +18,19 @@
        Toda a cor do site nasce aqui. Para trocar o visual,
        edite só este bloco (e o de modo escuro abaixo).
        ========================================================= */
-    --bg:#F6F5F2;
+    --bg:#FFF7CD;               /* offwhite */
     --surface:#FFFFFF;
-    --surface-2:#EFEDE8;
-    --text:#1A1A1F;
-    --text-soft:#5C5A66;
-    --muted:#928F9B;
-    --purple:#6D4DE6;
-    --purple-deep:#5A3DD1;
-    --green:#16B981;
-    --green-deep:#0F9E6E;
-    --on-accent:#FFFFFF;        /* texto sobre roxo ou verde */
-    --ink:26,26,31;             /* RGB de --text: base de hairlines e sombras */
-    --accent-rgb:109,77,230;    /* RGB de --purple: base da sombra colorida */
+    --surface-2:#FBEFC2;
+    --text:#301E0D;             /* escura */
+    --text-soft:#493018;        /* secundaria */
+    --muted:#7A6142;
+    --accent-1:#DD073E;         /* principal */
+    --accent-1-deep:#B00531;
+    --accent-2:#D8A649;         /* dourado do gradiente */
+    --accent-2-deep:#8A6220;
+    --on-accent:#FFF7CD;        /* texto sobre os acentos */
+    --ink:48,30,13;             /* RGB de --text: base de hairlines e sombras */
+    --accent-rgb:221,7,62;      /* RGB de --accent-1: base da sombra colorida */
 
     /* derivados — acompanham a paleta sozinhos, não precisa mexer */
     --hairline:rgba(var(--ink),0.10);
@@ -43,19 +43,19 @@
   }
   /* ---------- PALETA — MODO ESCURO ---------- */
   [data-theme="dark"]{
-    --bg:#121017;
-    --surface:#1B1924;
-    --surface-2:#23202E;
-    --text:#F3F1F8;
-    --text-soft:#B7B3C4;
-    --muted:#7E7A8C;
-    --purple:#9B82FF;
-    --purple-deep:#8169FF;
-    --green:#3CE6A6;
-    --green-deep:#23D292;
-    --on-accent:#14121C;        /* no escuro os acentos clareiam: texto escuro */
-    --ink:243,241,248;
-    --accent-rgb:155,130,255;
+    --bg:#241708;
+    --surface:#301E0D;          /* escura */
+    --surface-2:#3F2913;
+    --text:#FFF7CD;             /* offwhite */
+    --text-soft:#DFCFA0;
+    --muted:#A28A62;
+    --accent-1:#FF4A6E;         /* principal clareado p/ fundo escuro */
+    --accent-1-deep:#FF6B88;
+    --accent-2:#E8BC63;
+    --accent-2-deep:#F0CE87;
+    --on-accent:#2A1A0A;        /* no escuro os acentos clareiam: texto escuro */
+    --ink:255,247,205;
+    --accent-rgb:255,74,110;
 
     --hairline:rgba(var(--ink),0.12);
     --hairline-soft:rgba(var(--ink),0.07);
@@ -85,7 +85,7 @@
   .nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
   .brand{font-weight:800;font-size:1.12rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.55rem}
   .brand .dot{width:10px;height:10px;border-radius:50%;
-    background:linear-gradient(135deg,var(--purple),var(--green))}
+    background:linear-gradient(135deg,var(--accent-2),var(--accent-1))}
   .brand .role{font-weight:400;font-size:.78rem;color:var(--muted);letter-spacing:0}
   .nav-right{display:flex;align-items:center;gap:.6rem}
   .btn-contact-nav{
@@ -95,7 +95,7 @@
     color:var(--text);transition:all .25s var(--ease);
     text-decoration:none;display:inline-flex;align-items:center;
   }
-  .btn-contact-nav:hover{border-color:var(--purple);color:var(--purple)}
+  .btn-contact-nav:hover{border-color:var(--accent-1);color:var(--accent-1)}
 
   .lang-toggle{display:flex;background:var(--surface-2);border-radius:100px;padding:3px;border:1px solid var(--hairline-soft)}
   .lang-toggle button{
@@ -110,7 +110,7 @@
     background:var(--surface);cursor:pointer;display:grid;place-items:center;
     color:var(--text);transition:all .3s var(--ease);box-shadow:var(--shadow)
   }
-  .theme-btn:hover{transform:translateY(-1px);border-color:var(--purple)}
+  .theme-btn:hover{transform:translateY(-1px);border-color:var(--accent-1)}
   .theme-btn svg{width:18px;height:18px}
   .theme-btn .moon{display:none}
   [data-theme="dark"] .theme-btn .sun{display:none}
@@ -122,13 +122,13 @@
     text-align:center;
     position:relative;
     background:
-      radial-gradient(ellipse 80% 60% at 15% 50%, color-mix(in srgb,var(--purple) 9%,transparent), transparent 70%),
-      radial-gradient(ellipse 70% 50% at 85% 60%, color-mix(in srgb,var(--green) 8%,transparent), transparent 65%),
+      radial-gradient(ellipse 80% 60% at 15% 50%, color-mix(in srgb,var(--accent-2) 22%,transparent), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 85% 60%, color-mix(in srgb,var(--accent-1) 10%,transparent), transparent 65%),
       var(--bg);
   }
   .hero::before,.hero::after{
     content:"";position:absolute;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent 0%,var(--purple) 25%,var(--green) 75%,transparent 100%);
+    background:linear-gradient(90deg,transparent 0%,var(--accent-2) 25%,var(--accent-1) 75%,transparent 100%);
     opacity:.6;
   }
   .hero::before{top:0}
@@ -136,17 +136,17 @@
   .hero .label{
     margin-bottom:1.6rem;display:inline-flex;align-items:center;gap:.55rem;
     padding:.42rem .95rem;border-radius:100px;
-    border:1px solid color-mix(in srgb,var(--green) 28%,transparent);
-    background:color-mix(in srgb,var(--green) 7%,transparent);
-    color:var(--green-deep);font-size:.78rem;letter-spacing:.01em;text-transform:none;
+    border:1px solid color-mix(in srgb,var(--accent-2) 55%,transparent);
+    background:var(--surface);
+    color:var(--accent-2-deep);font-size:.78rem;letter-spacing:.01em;text-transform:none;
   }
-  .hero .label .av{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+  .hero .label .av{width:7px;height:7px;border-radius:50%;background:var(--accent-2);flex-shrink:0}
   .hero h1{
     font-weight:800;font-size:clamp(2.5rem,7.5vw,5.6rem);line-height:1.02;
     letter-spacing:-.03em;max-width:20ch;margin:0 auto;
   }
   .hero h1 .grad{
-    background:linear-gradient(120deg,var(--purple),var(--green));
+    background:linear-gradient(120deg,var(--accent-2),var(--accent-1));
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   }
   .hero p.sub{margin-top:1.6rem;max-width:52ch;font-size:1.18rem;color:var(--text-soft);line-height:1.55;margin-left:auto;margin-right:auto}
@@ -179,8 +179,8 @@
     padding:.85rem 1.5rem;border-radius:100px;border:1px solid transparent;
     transition:all .28s var(--ease);display:inline-flex;align-items:center;gap:.5rem;
   }
-  .btn-primary{background:var(--purple);color:var(--on-accent)}
-  .btn-primary:hover{background:var(--purple-deep);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+  .btn-primary{background:var(--accent-1);color:var(--on-accent)}
+  .btn-primary:hover{background:var(--accent-1-deep);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
   .btn-ghost{background:transparent;border-color:var(--hairline);color:var(--text)}
   .btn-ghost:hover{border-color:var(--text);transform:translateY(-2px)}
 
@@ -197,7 +197,7 @@
     padding:.5rem 1.05rem;border-radius:100px;border:1px solid var(--hairline);
     background:var(--surface);color:var(--text-soft);transition:all .25s var(--ease);
   }
-  .filter:hover{border-color:var(--purple);color:var(--text)}
+  .filter:hover{border-color:var(--accent-1);color:var(--text)}
   .filter.active{background:var(--text);color:var(--bg);border-color:var(--text)}
 
   /* ---------- Grid de projetos ---------- */
@@ -223,7 +223,7 @@
   .card:hover .art::after{opacity:1}
   .card .save{
     position:absolute;top:12px;right:12px;z-index:3;
-    background:var(--purple);color:var(--on-accent);font-weight:700;font-size:.78rem;
+    background:var(--accent-1);color:var(--on-accent);font-weight:700;font-size:.78rem;
     padding:.45rem .8rem;border-radius:100px;opacity:0;transform:translateY(-6px);
     transition:all .3s var(--ease);
   }
@@ -231,7 +231,7 @@
   .card .meta{padding:.95rem 1.05rem 1.1rem}
   .card .meta h3{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
   .card .meta .row{display:flex;justify-content:space-between;align-items:center;margin-top:.35rem}
-  .card .meta .cat{font-size:.76rem;font-weight:600;color:var(--purple)}
+  .card .meta .cat{font-size:.76rem;font-weight:600;color:var(--accent-1)}
   .card .meta .yr{font-size:.76rem;color:var(--muted)}
   .card.hide{display:none}
 
@@ -240,7 +240,7 @@
   /* ---------- Sobre ---------- */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;overflow:hidden;border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}
   .about-text{padding:clamp(24px,3.5vw,40px);display:flex;flex-direction:column;justify-content:center;gap:0}
-  .about-accent{width:28px;height:3px;background:linear-gradient(90deg,var(--purple),var(--green));border-radius:2px;margin-bottom:.9rem}
+  .about-accent{width:28px;height:3px;background:linear-gradient(90deg,var(--accent-2),var(--accent-1));border-radius:2px;margin-bottom:.9rem}
   .about-text .label{margin-bottom:.5rem;display:inline-flex;align-items:center;gap:.6rem}
   .about-text h2{font-weight:800;font-size:clamp(1.35rem,2.6vw,1.9rem);letter-spacing:-.025em;margin-bottom:.9rem;line-height:1.15}
   .about-sub{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.7rem!important}
@@ -249,9 +249,9 @@
   .about-tags{display:flex;flex-wrap:wrap;gap:.4rem}
   .about-tag{font-size:.75rem;font-weight:600;padding:.3rem .75rem;border-radius:100px;
     border:1px solid var(--hairline);color:var(--text-soft);background:var(--bg)}
-  .about-photo{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--purple),var(--green));padding:0;border-radius:0;box-shadow:none;aspect-ratio:unset;min-height:100%}
+  .about-photo{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--accent-2),var(--accent-1));padding:0;border-radius:0;box-shadow:none;aspect-ratio:unset;min-height:100%}
   .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:0}
-  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--purple) 18%,transparent) 0%,transparent 55%);pointer-events:none}
+  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--text) 22%,transparent) 0%,transparent 55%);pointer-events:none}
 
   /* ---------- Overlay de projeto ---------- */
   .proj-overlay{
@@ -285,7 +285,7 @@
     background:color-mix(in srgb,var(--bg) 88%,transparent);
     backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline-soft);
   }
-  .proj-header .proj-cat{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
+  .proj-header .proj-cat{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-1)}
   .proj-close{
     width:36px;height:36px;border-radius:50%;border:1px solid var(--hairline);
     background:var(--surface);cursor:pointer;display:grid;place-items:center;
@@ -306,11 +306,11 @@
   /* ---------- Contato / footer (placeholder, copy depois) ---------- */
   .contact{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:24px;padding:clamp(36px,6vw,72px);text-align:center;box-shadow:var(--shadow)}
   .contact h2{font-weight:800;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:-.025em;margin-bottom:1.4rem}
-  .contact h2 .grad{background:linear-gradient(120deg,var(--purple),var(--green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .contact h2 .grad{background:linear-gradient(120deg,var(--accent-2),var(--accent-1));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .contact .email{display:inline-block;margin-top:.4rem}
   .contact .socials{margin-top:2rem;display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap}
   .contact .socials a{font-weight:600;color:var(--text-soft);transition:color .25s}
-  .contact .socials a:hover{color:var(--purple)}
+  .contact .socials a:hover{color:var(--accent-1)}
   footer{padding:3rem 0;text-align:center;color:var(--muted);font-size:.85rem}
 
   /* ---------- Animações de entrada (scroll reveal) ---------- */
@@ -418,7 +418,7 @@
     .masonry{columns:1}
   }
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card,.ob{opacity:1;transform:none}}
-  :focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+  :focus-visible{outline:2px solid var(--accent-1);outline-offset:3px;border-radius:4px}
 </style>
 </head>
 <body>
