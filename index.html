@@ -13,7 +13,11 @@
   :root{
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    /* LIGHT (fundo claro mantido) */
+    /* =========================================================
+       PALETA — MODO CLARO
+       Toda a cor do site nasce aqui. Para trocar o visual,
+       edite só este bloco (e o de modo escuro abaixo).
+       ========================================================= */
     --bg:#F6F5F2;
     --surface:#FFFFFF;
     --surface-2:#EFEDE8;
@@ -24,14 +28,20 @@
     --purple-deep:#5A3DD1;
     --green:#16B981;
     --green-deep:#0F9E6E;
-    --hairline:rgba(26,26,31,0.10);
-    --hairline-soft:rgba(26,26,31,0.06);
-    --shadow:0 1px 2px rgba(26,26,31,.04),0 8px 30px rgba(26,26,31,.06);
-    --shadow-hover:0 6px 14px rgba(109,77,230,.12),0 18px 50px rgba(26,26,31,.12);
+    --on-accent:#FFFFFF;        /* texto sobre roxo ou verde */
+    --ink:26,26,31;             /* RGB de --text: base de hairlines e sombras */
+    --accent-rgb:109,77,230;    /* RGB de --purple: base da sombra colorida */
+
+    /* derivados — acompanham a paleta sozinhos, não precisa mexer */
+    --hairline:rgba(var(--ink),0.10);
+    --hairline-soft:rgba(var(--ink),0.06);
+    --shadow:0 1px 2px rgba(var(--ink),.04),0 8px 30px rgba(var(--ink),.06);
+    --shadow-hover:0 6px 14px rgba(var(--accent-rgb),.12),0 18px 50px rgba(var(--ink),.12);
 
     --maxw:1280px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
+  /* ---------- PALETA — MODO ESCURO ---------- */
   [data-theme="dark"]{
     --bg:#121017;
     --surface:#1B1924;
@@ -43,10 +53,14 @@
     --purple-deep:#8169FF;
     --green:#3CE6A6;
     --green-deep:#23D292;
-    --hairline:rgba(243,241,248,0.12);
-    --hairline-soft:rgba(243,241,248,0.07);
+    --on-accent:#14121C;        /* no escuro os acentos clareiam: texto escuro */
+    --ink:243,241,248;
+    --accent-rgb:155,130,255;
+
+    --hairline:rgba(var(--ink),0.12);
+    --hairline-soft:rgba(var(--ink),0.07);
     --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 34px rgba(0,0,0,.4);
-    --shadow-hover:0 6px 16px rgba(155,130,255,.22),0 20px 54px rgba(0,0,0,.5);
+    --shadow-hover:0 6px 16px rgba(var(--accent-rgb),.22),0 20px 54px rgba(0,0,0,.5);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -165,7 +179,7 @@
     padding:.85rem 1.5rem;border-radius:100px;border:1px solid transparent;
     transition:all .28s var(--ease);display:inline-flex;align-items:center;gap:.5rem;
   }
-  .btn-primary{background:var(--purple);color:#fff}
+  .btn-primary{background:var(--purple);color:var(--on-accent)}
   .btn-primary:hover{background:var(--purple-deep);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
   .btn-ghost{background:transparent;border-color:var(--hairline);color:var(--text)}
   .btn-ghost:hover{border-color:var(--text);transform:translateY(-2px)}
@@ -199,7 +213,8 @@
   }
   .card.in{opacity:1;transform:none}
   .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
-  .card .art{width:100%;position:relative}
+  .card .art{width:100%;position:relative;background:var(--surface)}
+  .card .art img{width:100%;height:100%;object-fit:cover;display:block}
   .card .art::after{
     content:"";position:absolute;inset:0;
     background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45));
@@ -208,7 +223,7 @@
   .card:hover .art::after{opacity:1}
   .card .save{
     position:absolute;top:12px;right:12px;z-index:3;
-    background:var(--purple);color:#fff;font-weight:700;font-size:.78rem;
+    background:var(--purple);color:var(--on-accent);font-weight:700;font-size:.78rem;
     padding:.45rem .8rem;border-radius:100px;opacity:0;transform:translateY(-6px);
     transition:all .3s var(--ease);
   }
@@ -221,12 +236,6 @@
   .card.hide{display:none}
 
   /* gradientes placeholder (roxo/verde) — troque por suas imagens */
-  .g1{background:linear-gradient(140deg,#6D4DE6,#9B82FF 60%,#16B981)}
-  .g2{background:linear-gradient(160deg,#0F9E6E,#16B981 55%,#A7F3D0)}
-  .g3{background:conic-gradient(from 200deg at 60% 40%,#6D4DE6,#16B981,#9B82FF,#6D4DE6)}
-  .g4{background:radial-gradient(80% 80% at 30% 20%,#9B82FF,transparent 60%),linear-gradient(160deg,#2a1f55,#16B981)}
-  .g5{background:linear-gradient(135deg,#5A3DD1,#6D4DE6 50%,#3CE6A6)}
-  .g6{background:radial-gradient(70% 70% at 70% 30%,#16B981,transparent 60%),linear-gradient(150deg,#6D4DE6,#23202E)}
 
   /* ---------- Sobre ---------- */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;overflow:hidden;border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}
@@ -343,7 +352,7 @@
 
   /* Seção de contato */
   .contact{transition:box-shadow .4s var(--ease)}
-  .contact:hover{box-shadow:0 8px 40px rgba(109,77,230,.1),0 2px 8px rgba(0,0,0,.04)}
+  .contact:hover{box-shadow:0 8px 40px rgba(var(--accent-rgb),.1),0 2px 8px rgba(var(--ink),.05)}
 
   /* ---------- Responsivo ---------- */
   @media(max-width:760px){
@@ -508,8 +517,9 @@
   /* =====================================================================
      1) SEUS PROJETOS  —  para ADICIONAR um trabalho, copie um bloco { }.
         Para REMOVER, apague o bloco. Para reordenar, mova o bloco.
-        ratio = proporção da imagem (altura visual no mural).
-        g1..g6 = gradiente provisório; depois trocamos por "img".
+        ratio = proporção do card no mural (hoje todos em 4/3).
+        img = imagem de capa. imgs = imagens abertas no overlay.
+        imgLayout:"stack" = imagens em coluna única (padrão: 3 colunas).
      ===================================================================== */
   const projects = [
     {
@@ -813,8 +823,8 @@
       card.className="card";
       card.style.transitionDelay=(i%4*0.05)+"s";
       card.innerHTML=`
-        <div class="art ${p.img?'':''+p.art}" style="aspect-ratio:${p.ratio}${p.img?';background:var(--surface)':''}">
-          ${p.img?`<img src="${p.img}" alt="${p.title[lang]}" style="width:100%;height:100%;object-fit:cover;display:block;">`:''}
+        <div class="art" style="aspect-ratio:${p.ratio}">
+          <img src="${p.img}" alt="${p.title[lang]}" loading="lazy">
           <span class="save">${i18n[lang].saveBtn}</span>
         </div>
         <div class="meta">
@@ -874,7 +884,6 @@
   /* ---------- init ---------- */
   /* ---------- overlay projeto ---------- */
   const overlay=document.getElementById("projOverlay");
-  const imgHeights=["aspect-ratio:4/5","aspect-ratio:3/2","aspect-ratio:16/9","aspect-ratio:1/1"];
 
   function openProject(p){
     document.getElementById("projCat").textContent=(catLabels[p.cat]?catLabels[p.cat][lang]:p.cat)+" · "+p.year;
@@ -884,18 +893,12 @@
     const box=document.getElementById("projImages");
     box.className="proj-images"+(p.imgLayout==="stack"?" stack":"");
     box.innerHTML="";
-    p.imgs.forEach((src,i)=>{
+    p.imgs.forEach(src=>{
       const d=document.createElement("div");
-      const isReal=src.includes(".");
-      if(isReal){
-        d.className="proj-img-ph";
-        const im=document.createElement("img");
-        im.src=src; im.alt="";
-        d.appendChild(im);
-      } else {
-        d.className="proj-img-ph "+src;
-        d.style.cssText=imgHeights[i%imgHeights.length]+";min-height:180px";
-      }
+      d.className="proj-img-ph";
+      const im=document.createElement("img");
+      im.src=src; im.alt=""; im.loading="lazy";
+      d.appendChild(im);
       box.appendChild(d);
     });
     overlay.classList.add("open");
