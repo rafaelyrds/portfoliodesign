@@ -72,6 +72,8 @@
     font-size:.7rem;font-weight:600;letter-spacing:.14em;
     text-transform:uppercase;color:var(--muted);
   }
+  /* <em> nos titulos = destaque em cor, nunca itálico */
+  h1 em,h2 em,h3 em{font-style:normal;color:var(--accent)}
 
   /* ---------- A moldura ---------- */
   .shell{
@@ -145,7 +147,6 @@
     font-weight:900;font-size:clamp(2.6rem,7.4vw,6.1rem);
     line-height:.95;letter-spacing:-.045em;max-width:17ch;
   }
-  .hero h1 em{font-style:normal;color:var(--accent)}
   .hero-sub{
     margin-top:clamp(20px,2.4vw,32px);max-width:46ch;
     font-size:clamp(1rem,1.2vw,1.16rem);color:var(--text-soft);line-height:1.55;
@@ -248,7 +249,6 @@
     font-weight:900;font-size:clamp(1.5rem,2.6vw,2.4rem);
     line-height:.98;letter-spacing:-.04em;margin-bottom:1.2rem;
   }
-  .about-sub{font-size:1.02rem;font-weight:600;margin-bottom:.9rem}
   .about-text p{color:var(--text-soft);font-size:.95rem;line-height:1.6;margin-bottom:.85rem;max-width:52ch}
   .about-text p b{font-weight:600;color:var(--text)}
   .about-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
@@ -271,7 +271,6 @@
     font-weight:900;font-size:clamp(2.1rem,6vw,4.6rem);
     line-height:.94;letter-spacing:-.045em;max-width:20ch;
   }
-  .contact h2 em{font-style:normal;color:var(--accent)}
   .contact-row{margin-top:clamp(28px,3.4vw,46px);display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
   .contact .btn-primary{background:var(--accent);color:var(--on-accent)}
   .socials{display:flex;gap:.6rem;flex-wrap:wrap}
@@ -435,7 +434,6 @@
         <div class="about-text">
           <span class="eyebrow" data-i18n="aboutLabel"></span>
           <h2 data-i18n="aboutTitle"></h2>
-          <p class="about-sub" data-i18n="aboutSub"></p>
           <p data-i18n="aboutP1"></p>
           <p data-i18n="aboutP2"></p>
           <div class="about-tags" id="about-tags"></div>
@@ -675,10 +673,9 @@
       s4t:"E muito mais", s4d:"Esses são só os serviços mais recorrentes. Trabalho também com campanhas, e-mail marketing, apresentações, materiais gráficos e outras demandas de marca. Me chama que a gente vê o que faz sentido pro seu projeto.",
       workTitle:"Feitos aqui",
       aboutLabel:"Sobre mim",
-      aboutTitle:"Design com propósito, entregue com cuidado.",
-      aboutSub:"Prazer, sou a Rafa, designer há mais de 8 anos.",
-      aboutP1:"Minha história nesse ramo começou cedo, muito antes de eu saber que tinha nome. Sempre gostei de edição e criava artes do zero por pura intuição. Na adolescência, comecei a criar peças para a minha igreja local como voluntária e foi ali que tudo fez sentido, descobri que <b>design era minha aptidão.</b>",
-      aboutP2:"Desde então, entendi que design não é só beleza: ele é <b>estratégico, consistente e precisa fazer sentido pra quem o vê;</b> e para isso, você pode contar comigo!",
+      aboutTitle:'Prazer, Rafa<em>(ely)</em>.',
+      aboutP1:"Minha história nesse ramo começou cedo, muito antes de eu saber que tinha nome. Sempre gostei de edição e criava artes do zero por pura intuição. Na adolescência, comecei a criar peças para a minha igreja local como voluntária e foi ali que tudo fez sentido: descobri que design era minha aptidão.",
+      aboutP2:"Desde então, entendi que design não é só beleza, ele também é estratégico, consistente e precisa fazer sentido pra quem o vê. Foi isso que me levou pro marketing também, porque uma peça bonita sem direção não resolve nada pra uma marca. E nos últimos 8 anos venho unindo esses dois mundos!",
       contactTitle:'Vamos <em>conversar?</em>',
       contactBtn:"Chamar no WhatsApp"+ARW,
       countSuffix:{one:"projeto",many:"projetos"}, saveBtn:"Ver projeto"
@@ -698,10 +695,9 @@
       s4t:"And much more", s4d:"These are just the most frequent services. I also work with campaigns, email marketing, presentations, print materials and other brand needs. Message me and we'll figure out what makes sense for your project.",
       workTitle:"Made here",
       aboutLabel:"About me",
-      aboutTitle:"Design with purpose, delivered with care.",
-      aboutSub:"I'm Rafa, a designer with over 8 years in the field.",
-      aboutP1:"My story here started early, long before I knew it had a name. I always loved editing and made artwork from scratch on pure instinct. As a teenager I began designing for my local church as a volunteer, and that's when it clicked — I found out <b>design was my calling.</b>",
-      aboutP2:"Since then I've understood that design isn't only about beauty: it's <b>strategic, consistent, and has to make sense to whoever sees it</b> — and that's where I come in.",
+      aboutTitle:'Nice to meet you, Rafa<em>(ely)</em>.',
+      aboutP1:"My story in this field started early, long before I knew it had a name. I always loved editing and made artwork from scratch on pure instinct. As a teenager I began designing for my local church as a volunteer, and that's where it all clicked: I found out design was my calling.",
+      aboutP2:"Since then I've understood that design isn't only about beauty, it's also strategic, consistent, and has to make sense to whoever sees it. That's what pulled me into marketing as well, because a beautiful piece with no direction solves nothing for a brand. And for the last 8 years I've been bringing those two worlds together.",
       contactTitle:'Shall we <em>talk?</em>',
       contactBtn:"Message on WhatsApp"+ARW,
       countSuffix:{one:"project",many:"projects"}, saveBtn:"View project"
