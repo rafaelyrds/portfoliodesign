@@ -82,13 +82,13 @@
     background:var(--bg);border-radius:var(--r-shell);
     overflow:hidden;position:relative;
   }
-  .pad{padding:0 clamp(20px,3.4vw,54px)}
+  .pad{padding-inline:clamp(24px,3.6vw,58px)}
 
   /* ---------- Header ---------- */
   header{position:sticky;top:0;z-index:60;background:var(--bg)}
   .nav{
     display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);
-    padding:clamp(14px,1.6vw,22px) 0;
+    padding-block:clamp(14px,1.6vw,22px);
   }
   .logo{
     font-family:var(--font-round);font-weight:800;
@@ -108,7 +108,7 @@
   .nav-right{margin-left:auto;display:flex;align-items:center;gap:.5rem}
 
   .btn{
-    font-family:var(--font);font-weight:600;cursor:pointer;
+    font-family:var(--font);font-weight:600;cursor:pointer;white-space:nowrap;
     border:0;border-radius:100px;transition:all .25s var(--ease);
     display:inline-flex;align-items:center;gap:.6rem;
   }
@@ -147,7 +147,7 @@
   .lang button.active{background:var(--bg);color:var(--text)}
 
   /* ---------- Hero ---------- */
-  .hero{padding:clamp(40px,6vw,86px) 0 clamp(28px,3.4vw,44px)}
+  .hero{padding-block:clamp(40px,6vw,86px) clamp(28px,3.4vw,44px)}
   .hero .eyebrow{display:block;margin-bottom:clamp(18px,2.2vw,28px)}
   .hero h1{
     font-weight:900;font-size:clamp(2.6rem,7.4vw,6.1rem);
@@ -197,7 +197,7 @@
   .brand-logo{height:clamp(22px,2.4vw,30px);width:auto;flex-shrink:0;filter:grayscale(1) opacity(.42)}
 
   /* ---------- Cabeçalho de seção ---------- */
-  .section{padding:clamp(52px,7vw,110px) 0}
+  .section{padding-block:clamp(52px,7vw,110px)}
   .sec-head{margin-bottom:clamp(26px,3vw,42px)}
   .sec-head .eyebrow{display:block;margin-bottom:.9rem}
   .sec-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:1.4rem;flex-wrap:wrap}
@@ -307,7 +307,7 @@
 
   /* ---------- Rodapé ---------- */
   footer{
-    padding:clamp(26px,3vw,44px) 0;
+    padding-block:clamp(26px,3vw,44px);
     display:flex;justify-content:space-between;align-items:center;
     gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted);
   }
@@ -365,6 +365,10 @@
   @media(max-width:760px){
     .nav-pill{display:none}
     .hero h1{max-width:none}
+  }
+  @media(max-width:620px){
+    .nav .btn-primary{display:none}   /* o hero ja tem esse CTA */
+    .nav{justify-content:space-between}
   }
   @media(max-width:560px){
     body{padding:8px}
