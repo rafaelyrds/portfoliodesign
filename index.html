@@ -254,28 +254,50 @@
   .about-photo{position:relative;min-height:clamp(320px,42vw,560px)}
   .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
 
-  /* ---------- Contato ---------- */
+  /* ---------- Contato ----------
+     A foto ocupa o bloco todo, então aqui as cores não seguem o tema:
+     o fundo é sempre a imagem, e o texto é sempre creme.
+     --creme e --escuro existem só para este bloco.                     */
   .contact{
-    background:var(--text);color:var(--bg);
+    --creme:#FFF7CD;
+    --escuro:#301E0D;
+    position:relative;overflow:hidden;isolation:isolate;
+    background:var(--escuro);                 /* cor de espera até a foto carregar */
+    color:var(--creme);
     border-radius:var(--r-card);padding:clamp(36px,5.4vw,86px) clamp(24px,3.4vw,64px);
+  }
+  .contact::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:url("contato-fundo.jpg") 72% 26%/cover no-repeat;
+  }
+  /* véu: garante que o texto continue legível sobre qualquer parte da foto */
+  .contact::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(100deg,
+      rgba(48,30,13,.30) 0%,
+      rgba(48,30,13,.12) 46%,
+      rgba(48,30,13,0) 100%);
   }
   .contact h2{
     font-weight:900;font-size:clamp(2.1rem,6vw,4.6rem);
     line-height:.94;letter-spacing:-.045em;max-width:20ch;
   }
+  .contact h2 em{color:var(--creme)}          /* rosa sobre foto rosa desapareceria */
   .contact-row{margin-top:clamp(28px,3.4vw,46px);display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
-  .contact .btn-primary{background:var(--accent);color:var(--on-accent)}
+  .contact .btn-primary{background:var(--creme);color:var(--escuro)}
+  .contact .btn-primary .arw{background:var(--escuro);color:var(--creme)}
+  .contact .btn-primary:hover{background:#fff}
   .socials{display:flex;gap:.6rem;flex-wrap:wrap}
   .social{
     display:inline-flex;align-items:center;gap:.55rem;
     padding:.56rem 1.15rem;border-radius:100px;
-    border:1px solid color-mix(in srgb,var(--bg) 28%,transparent);
-    color:color-mix(in srgb,var(--bg) 86%,transparent);
+    border:1px solid color-mix(in srgb,var(--creme) 42%,transparent);
+    color:color-mix(in srgb,var(--creme) 88%,transparent);
     font-size:.88rem;font-weight:500;
     transition:border-color .25s var(--ease),color .25s var(--ease);
   }
   .social svg{width:16px;height:16px;flex-shrink:0}
-  .social:hover{border-color:var(--gold);color:var(--gold)}
+  .social:hover{border-color:var(--creme);color:var(--creme)}
 
   /* ---------- Rodapé ---------- */
   footer{
