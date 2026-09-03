@@ -13,7 +13,6 @@
   :root{
     /* SF Pro primeiro; Inter só como rede de segurança fora do ecossistema Apple */
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-round: ui-rounded, "SF Pro Rounded", "Hiragino Maru Gothic ProN", var(--font);
 
     /* =========================================================
        PALETA — MODO CLARO
@@ -90,12 +89,8 @@
     display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);
     padding-block:clamp(14px,1.6vw,22px);
   }
-  .logo{
-    font-family:var(--font-round);font-weight:800;
-    font-size:1.5rem;letter-spacing:-.03em;line-height:1;
-    flex-shrink:0;
-  }
-  .logo i{color:var(--accent);font-style:normal}
+  .logo{display:flex;align-items:center;flex-shrink:0;color:var(--text)}
+  .logo svg{height:clamp(21px,2.3vw,27px);width:auto;display:block}
   .nav-pill{
     display:flex;align-items:center;gap:.15rem;
     background:var(--surface);border-radius:100px;padding:5px;
@@ -148,7 +143,6 @@
 
   /* ---------- Hero ---------- */
   .hero{padding-block:clamp(40px,6vw,86px) clamp(28px,3.4vw,44px)}
-  .hero .eyebrow{display:block;margin-bottom:clamp(18px,2.2vw,28px)}
   .hero h1{
     font-weight:900;font-size:clamp(2.6rem,7.4vw,6.1rem);
     line-height:.95;letter-spacing:-.045em;max-width:17ch;
@@ -161,27 +155,27 @@
   .hero-sub b{font-weight:600;color:var(--text)}
   .hero-actions{margin-top:clamp(26px,3vw,40px);display:flex;gap:.7rem;flex-wrap:wrap}
 
-  /* faixa de serviços no pé do hero */
-  .feats{
-    margin-top:clamp(44px,5.4vw,78px);padding-top:clamp(22px,2.4vw,32px);
-    border-top:1px solid var(--hairline);
-    display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,40px);
+  /* ---------- Serviços ---------- */
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:clamp(12px,1.4vw,18px)}
+  .svc{
+    background:var(--surface);border-radius:var(--r-card);
+    padding:clamp(20px,2.1vw,30px);display:flex;flex-direction:column;
   }
-  .feat{position:relative}
-  .feat b{display:block;font-size:.93rem;font-weight:600;letter-spacing:-.01em}
-  .feat span{display:block;font-size:.87rem;color:var(--muted);margin-top:.18rem}
-  .feat::before{
-    content:"";display:block;width:18px;height:2px;border-radius:2px;
-    background:var(--accent);margin-bottom:.7rem;
+  .svc-n{
+    font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--accent);
+    margin-bottom:clamp(34px,4.6vw,64px);
   }
-  .feat:nth-child(2)::before{background:var(--gold)}
-  .feat:nth-child(3)::before{background:var(--accent)}
-  .feat:nth-child(4)::before{background:var(--gold)}
+  .svc:nth-child(even) .svc-n{color:var(--gold)}
+  .svc h3{
+    font-weight:900;font-size:clamp(1.05rem,1.35vw,1.32rem);
+    letter-spacing:-.032em;line-height:1.04;margin-bottom:.55rem;
+  }
+  .svc p{font-size:.87rem;color:var(--muted);line-height:1.5}
 
   /* ---------- Marcas ---------- */
   .brands{
-    margin-top:clamp(34px,4vw,56px);padding:clamp(18px,2vw,26px) 0;
-    border-top:1px solid var(--hairline-soft);
+    margin-top:clamp(44px,5.4vw,78px);padding:clamp(20px,2.4vw,30px) 0 0;
+    border-top:1px solid var(--hairline);
     position:relative;overflow:hidden;
     mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
@@ -227,21 +221,23 @@
     transition:opacity .6s var(--ease),transform .6s var(--ease),background .3s var(--ease);
   }
   .card.in{opacity:1;transform:none}
-  .card:nth-child(3n+1){background:var(--accent)}
-  .card:nth-child(3n+1) .tag{background:var(--on-accent);color:var(--accent)}
-  .card:nth-child(3n+1) h3,.card:nth-child(3n+1) .card-desc{color:var(--on-accent)}
+  .card:hover{background:var(--accent)}
+  .card:hover .tag{background:var(--on-accent);color:var(--accent)}
+  .card:hover h3,.card:hover .card-desc{color:var(--on-accent)}
   .card-head{padding:clamp(16px,1.5vw,22px) clamp(16px,1.5vw,22px) clamp(14px,1.4vw,20px)}
   .card-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:clamp(14px,1.6vw,22px)}
   .tag{
     background:var(--bg);color:var(--text-soft);
     font-size:.72rem;font-weight:600;letter-spacing:-.005em;
     padding:.28rem .68rem;border-radius:100px;white-space:nowrap;
+    transition:background .3s var(--ease),color .3s var(--ease);
   }
   .card h3{
+    transition:color .3s var(--ease);
     font-weight:900;font-size:clamp(1.15rem,1.6vw,1.6rem);
     line-height:1;letter-spacing:-.035em;
   }
-  .card-desc{font-size:.85rem;color:var(--muted);margin-top:.5rem;line-height:1.45}
+  .card-desc{font-size:.85rem;color:var(--muted);margin-top:.5rem;line-height:1.45;transition:color .3s var(--ease)}
   .card-art{position:relative;margin:0 clamp(8px,.8vw,10px) clamp(8px,.8vw,10px);border-radius:var(--r-inner);overflow:hidden;background:var(--bg)}
   .card-art img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s var(--ease)}
   .card:hover .card-art img{transform:scale(1.035)}
@@ -291,8 +287,7 @@
     background:var(--text);color:var(--bg);
     border-radius:var(--r-card);padding:clamp(36px,5.4vw,86px) clamp(24px,3.4vw,64px);
   }
-  .contact .eyebrow{color:rgba(var(--ink),.5);display:block;margin-bottom:1.1rem}
-  [data-theme="dark"] .contact .eyebrow{color:var(--muted)}
+  .contact .eyebrow{color:color-mix(in srgb,var(--bg) 58%,transparent);display:block;margin-bottom:1.1rem}
   .contact h2{
     font-weight:900;font-size:clamp(2.1rem,6vw,4.6rem);
     line-height:.94;letter-spacing:-.045em;max-width:20ch;
@@ -300,10 +295,17 @@
   .contact h2 em{font-style:normal;color:var(--accent)}
   .contact-row{margin-top:clamp(28px,3.4vw,46px);display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap}
   .contact .btn-primary{background:var(--accent);color:var(--on-accent)}
-  .socials{display:flex;gap:1.2rem;flex-wrap:wrap}
-  .socials a{font-size:.9rem;font-weight:500;color:rgba(var(--ink),.62);transition:color .22s var(--ease)}
-  [data-theme="dark"] .socials a{color:var(--muted)}
-  .socials a:hover{color:var(--accent)}
+  .socials{display:flex;gap:.6rem;flex-wrap:wrap}
+  .social{
+    display:inline-flex;align-items:center;gap:.55rem;
+    padding:.56rem 1.15rem;border-radius:100px;
+    border:1px solid color-mix(in srgb,var(--bg) 28%,transparent);
+    color:color-mix(in srgb,var(--bg) 86%,transparent);
+    font-size:.88rem;font-weight:500;
+    transition:border-color .25s var(--ease),color .25s var(--ease);
+  }
+  .social svg{width:16px;height:16px;flex-shrink:0}
+  .social:hover{border-color:var(--gold);color:var(--gold)}
 
   /* ---------- Rodapé ---------- */
   footer{
@@ -344,11 +346,9 @@
 
   /* ---------- Reveal ---------- */
   @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-  .hero .eyebrow{animation:up .6s var(--ease) .05s both}
-  .hero h1{animation:up .7s var(--ease) .14s both}
-  .hero-sub{animation:up .7s var(--ease) .26s both}
-  .hero-actions{animation:up .7s var(--ease) .36s both}
-  .feats{animation:up .7s var(--ease) .46s both}
+  .hero h1{animation:up .7s var(--ease) .05s both}
+  .hero-sub{animation:up .7s var(--ease) .17s both}
+  .hero-actions{animation:up .7s var(--ease) .28s both}
   .ob{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
   .ob.in{opacity:1;transform:none}
   .btn:active{transform:scale(.97)}
@@ -356,7 +356,6 @@
   /* ---------- Responsivo ---------- */
   @media(max-width:1080px){
     .grid{grid-template-columns:repeat(2,1fr)}
-    .feats{grid-template-columns:repeat(2,1fr);row-gap:26px}
     .about{grid-template-columns:1fr}
     .about-text{border-right:0;border-bottom:1px solid var(--hairline-soft)}
     .about-photo{min-height:340px;order:2}
@@ -374,7 +373,6 @@
     body{padding:8px}
     :root{--r-shell:20px;--r-card:16px;--r-inner:12px}
     .grid{grid-template-columns:1fr}
-    .feats{grid-template-columns:1fr;row-gap:20px}
     .btn-lg{font-size:.92rem}
     .hero-actions .btn{width:100%;justify-content:space-between}
     .contact h2{max-width:none}
@@ -394,8 +392,9 @@
 
   <header>
     <div class="nav pad">
-      <a href="#top" class="logo">ely<i>.</i></a>
+      <a href="#top" class="logo" aria-label="ely. — início"><svg viewBox="0 0 593 455" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ely."><path d="M499.359 305.793C499.359 299.45 500.539 293.476 502.9 287.87C505.407 282.117 508.726 277.102 512.857 272.824C517.135 268.546 522.076 265.227 527.682 262.867C533.435 260.359 539.557 259.105 546.047 259.105C552.39 259.105 558.364 260.359 563.97 262.867C569.723 265.227 574.738 268.546 579.016 272.824C583.294 277.102 586.613 282.117 588.973 287.87C591.481 293.476 592.735 299.45 592.735 305.793C592.735 312.284 591.481 318.406 588.973 324.159C586.613 329.764 583.294 334.706 579.016 338.984C574.738 343.114 569.723 346.359 563.97 348.719C558.364 351.227 552.39 352.481 546.047 352.481C539.557 352.481 533.435 351.227 527.682 348.719C522.076 346.359 517.135 343.114 512.857 338.984C508.726 334.706 505.407 329.764 502.9 324.159C500.539 318.406 499.359 312.284 499.359 305.793Z"/><path d="M505.864 86.9586C504.241 93.1542 502.84 100.604 501.66 109.307C500.627 118.01 499.668 127.377 498.783 137.408C497.898 147.439 497.161 157.912 496.57 168.828C496.128 179.744 495.685 190.365 495.243 200.691C494.358 225.03 493.841 250.698 493.694 277.692C493.694 292.739 492.735 307.564 490.818 322.167C489.047 336.771 486.097 350.564 481.967 363.545C477.984 376.673 472.747 388.769 466.257 399.833C459.914 411.044 452.095 420.632 442.802 428.598C433.656 436.711 422.962 443.054 410.718 447.627C398.622 452.2 384.903 454.486 369.562 454.486C355.253 454.486 342.862 453.011 332.389 450.061C321.916 447.11 313.212 442.906 306.279 437.448C299.494 432.138 294.405 425.721 291.012 418.198C287.767 410.675 286.144 402.414 286.144 393.416C286.144 384.418 287.693 376.231 290.79 368.855C293.888 361.627 297.945 355.505 302.96 350.49C307.976 345.474 313.655 341.639 319.998 338.984C326.341 336.181 332.758 334.78 339.248 334.78C347.509 334.78 355.327 337.14 362.703 341.86C370.078 346.581 375.684 354.03 379.519 364.208C378.634 363.471 377.602 362.955 376.422 362.66C375.389 362.512 374.283 362.438 373.103 362.438C371.48 362.438 369.783 362.807 368.013 363.545C366.391 364.282 364.916 365.315 363.588 366.642C362.26 367.97 361.154 369.445 360.269 371.068C359.531 372.838 359.163 374.682 359.163 376.599C359.163 378.812 359.605 380.656 360.49 382.131C361.375 383.754 362.408 385.008 363.588 385.893C364.916 386.778 366.317 387.368 367.792 387.663C369.415 388.105 370.89 388.327 372.217 388.327C374.283 388.327 376.864 387.884 379.962 386.999C383.06 386.114 386.231 384.27 389.476 381.467C392.869 378.665 396.188 374.756 399.433 369.74C402.826 364.725 405.777 358.013 408.284 349.605C410.939 341.344 413.005 331.239 414.48 319.291C416.102 307.342 416.84 293.034 416.692 276.365C412.857 286.691 408.801 295.099 404.523 301.589C400.392 307.932 395.967 312.874 391.247 316.414C386.674 319.955 381.806 322.315 376.643 323.495C371.627 324.675 366.243 325.265 360.49 325.265C353.262 325.265 345.665 324.011 337.699 321.504C329.881 318.848 322.653 314.275 316.015 307.785C309.525 301.147 304.14 292.149 299.863 280.79C295.585 269.432 293.446 254.975 293.446 237.421C293.446 235.061 293.446 233.439 293.446 232.553C293.593 231.521 293.667 230.783 293.667 230.341C293.667 229.751 293.741 229.087 293.888 228.349C294.036 227.612 294.11 226.21 294.11 224.145C294.11 221.933 294.11 218.835 294.11 214.852C294.257 210.869 294.331 205.264 294.331 198.036C294.331 189.627 294.183 180.113 293.888 169.492C293.593 158.871 292.929 148.471 291.897 138.293C291.012 128.115 289.684 118.895 287.914 110.634C286.144 102.226 283.857 96.0307 281.055 92.0478C293.003 94.113 304.214 95.5144 314.688 96.2519C325.308 96.9895 334.97 97.3583 343.674 97.3583C349.427 97.3583 354.59 97.2845 359.163 97.137C363.883 96.842 367.94 96.5469 371.332 96.2519C375.168 95.9569 378.634 95.5881 381.732 95.1456C380.552 97.6533 379.224 102.447 377.749 109.528C376.422 116.609 375.094 125.091 373.766 134.974C372.439 144.857 371.332 155.699 370.447 167.5C369.562 179.154 369.12 190.955 369.12 202.903C369.12 211.902 369.783 219.572 371.111 225.915C372.439 232.258 374.209 237.495 376.422 241.626C378.782 245.608 381.437 248.559 384.387 250.476C387.485 252.394 390.804 253.353 394.344 253.353C399.95 253.353 404.375 251.066 407.62 246.493C411.013 241.921 413.89 236.168 416.25 229.234C415.955 220.089 415.439 209.394 414.701 197.15C413.963 184.907 412.931 172.147 411.603 158.871C410.423 145.595 408.801 132.245 406.735 118.821C404.818 105.25 402.384 92.6379 399.433 80.9844C404.006 82.607 409.464 84.0821 415.807 85.4098C421.265 86.5899 427.903 87.6224 435.722 88.5075C443.54 89.2451 452.759 89.6139 463.38 89.6139C475.919 89.6139 490.08 88.7288 505.864 86.9586Z"/><path d="M293.978 340.311C291.471 340.164 288.52 339.943 285.128 339.648C282.177 339.5 278.637 339.353 274.507 339.205C270.524 339.058 265.951 338.984 260.788 338.984C251.2 338.984 240.136 339.426 227.598 340.311C215.207 341.049 201.709 342.524 187.105 344.737C189.171 340.606 191.015 334.927 192.637 327.699C194.26 320.323 195.661 312.063 196.841 302.917C198.021 293.624 198.98 283.814 199.718 273.488C200.603 263.015 201.267 252.541 201.709 242.068C202.299 231.595 202.668 221.49 202.816 211.754C203.111 201.871 203.332 193.02 203.479 185.202C203.627 177.236 203.701 170.524 203.701 165.067C203.701 159.609 203.701 156.068 203.701 154.446C203.406 129.811 202.742 106.947 201.709 85.8523C201.267 77.0015 200.75 68.077 200.16 59.0788C199.57 50.0805 198.833 41.6723 197.948 33.8541C197.063 26.036 196.03 19.1766 194.85 13.2761C193.817 7.37562 192.563 2.95025 191.088 0C203.037 2.06518 214.1 3.46655 224.279 4.20411C234.457 4.94167 243.603 5.31046 251.716 5.31046C257.026 5.31046 261.821 5.23669 266.098 5.08918C270.376 4.79415 273.99 4.49913 276.941 4.20411C280.481 3.90908 283.579 3.5403 286.234 3.09776C284.906 9.73583 283.652 18.144 282.472 28.3224C281.44 38.5008 280.481 49.933 279.596 62.6191C278.858 75.3051 278.268 88.95 277.826 103.554C277.383 118.158 277.162 133.204 277.162 148.693C277.162 166.394 277.457 184.243 278.047 202.24C278.637 220.236 279.596 237.643 280.923 254.459C282.251 271.276 283.947 287.059 286.013 301.811C288.225 316.414 290.881 329.248 293.978 340.311Z"/><path d="M195.159 135.416C195.159 146.48 193.536 157.248 190.291 167.722C187.193 178.195 181.662 187.488 173.696 195.601C165.73 203.715 154.962 210.205 141.391 215.073C127.967 219.941 110.856 222.375 90.0564 222.375C90.6464 229.603 92.1216 235.651 94.4818 240.519C96.9895 245.387 99.9397 249.296 103.333 252.246C106.725 255.196 110.339 257.409 114.175 258.884C118.01 260.359 121.55 261.392 124.796 261.982C128.041 262.572 130.77 262.867 132.983 262.867C135.195 262.867 136.302 262.867 136.302 262.867C145.447 261.835 153.634 259.474 160.862 255.787C163.96 254.311 166.984 252.468 169.934 250.255C172.885 247.895 175.54 245.166 177.9 242.068C180.408 238.823 182.399 235.209 183.874 231.226C185.497 227.095 186.456 222.375 186.751 217.065C190.586 226.653 193.241 235.651 194.717 244.059C196.339 252.32 197.15 260.064 197.15 267.293C197.15 280.569 194.717 292.812 189.849 304.023C185.128 315.087 178.564 324.675 170.156 332.788C161.747 340.901 151.717 347.171 140.063 351.596C128.557 356.169 116.019 358.455 102.447 358.455C89.1713 358.455 76.3377 356.169 63.9467 351.596C51.7031 347.023 40.7872 339.795 31.1989 329.912C21.7581 319.881 14.1612 306.9 8.40821 290.968C2.80274 275.037 0 255.713 0 232.996C0 208.361 3.5403 186.529 10.6209 167.5C17.7015 148.471 27.2161 132.54 39.1646 119.706C51.1131 106.725 64.9055 96.9155 80.5418 90.2775C96.3257 83.4919 112.847 80.0991 130.106 80.0991C138.662 80.0991 146.849 81.058 154.667 82.9756C162.633 84.8933 169.566 88.0648 175.466 92.4902C181.514 96.9155 186.308 102.669 189.849 109.749C193.389 116.682 195.159 125.238 195.159 135.416ZM89.1713 185.866C93.3017 185.718 98.0958 184.907 103.554 183.432C109.012 181.809 114.175 179.596 119.043 176.794C123.911 173.991 127.967 170.524 131.212 166.394C134.605 162.264 136.302 157.543 136.302 152.233C136.302 148.84 135.121 146.111 132.761 144.046C130.401 141.981 127.377 140.948 123.689 140.948C118.526 140.948 113.88 142.423 109.749 145.373C105.766 148.324 102.3 152.011 99.3497 156.437C96.5469 160.862 94.2605 165.73 92.4903 171.041C90.7202 176.351 89.6139 181.293 89.1713 185.866Z"/></svg></a>
       <nav class="nav-pill">
+        <a href="#servicos" data-i18n="navSvc"></a>
         <a href="#trabalhos" data-i18n="navWork"></a>
         <a href="#sobre" data-i18n="navAbout"></a>
         <a href="#contato" data-i18n="navContactShort"></a>
@@ -418,7 +417,6 @@
 
     <!-- HERO -->
     <section class="hero pad">
-      <span class="eyebrow" data-i18n="heroEyebrow"></span>
       <h1 data-i18n="heroTitle"></h1>
       <p class="hero-sub" data-i18n="heroSub"></p>
       <div class="hero-actions">
@@ -426,22 +424,29 @@
         <a href="#contato" class="btn btn-ghost btn-lg" data-i18n-html="ctaTalk"></a>
       </div>
 
-      <div class="feats">
-        <div class="feat"><b data-i18n="f1a"></b><span data-i18n="f1b"></span></div>
-        <div class="feat"><b data-i18n="f2a"></b><span data-i18n="f2b"></span></div>
-        <div class="feat"><b data-i18n="f3a"></b><span data-i18n="f3b"></span></div>
-        <div class="feat"><b data-i18n="f4a"></b><span data-i18n="f4b"></span></div>
-      </div>
-
       <div class="brands" aria-label="Marcas com quem já trabalhei">
         <div class="brands-track" id="brandsTrack"></div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="section pad" id="servicos">
+      <div class="sec-head ob">
+        <span class="eyebrow" data-i18n="svcEyebrow"></span>
+        <div class="sec-head-row"><h2 data-i18n="svcTitle"></h2></div>
+      </div>
+      <div class="svc-grid">
+        <article class="svc ob"><span class="svc-n">01</span><h3 data-i18n="s1t"></h3><p data-i18n="s1d"></p></article>
+        <article class="svc ob"><span class="svc-n">02</span><h3 data-i18n="s2t"></h3><p data-i18n="s2d"></p></article>
+        <article class="svc ob"><span class="svc-n">03</span><h3 data-i18n="s3t"></h3><p data-i18n="s3d"></p></article>
+        <article class="svc ob"><span class="svc-n">04</span><h3 data-i18n="s4t"></h3><p data-i18n="s4d"></p></article>
+        <article class="svc ob"><span class="svc-n">05</span><h3 data-i18n="s5t"></h3><p data-i18n="s5d"></p></article>
       </div>
     </section>
 
     <!-- TRABALHOS -->
     <section class="section pad" id="trabalhos">
       <div class="sec-head ob">
-        <span class="eyebrow" data-i18n="workEyebrow"></span>
         <div class="sec-head-row">
           <h2 data-i18n="workTitle"></h2>
           <span class="count" id="count"></span>
@@ -476,8 +481,8 @@
         <div class="contact-row">
           <a href="https://wa.me/5511993528526" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-i18n-html="contactBtn"></a>
           <div class="socials">
-            <a href="https://www.instagram.com/studio.elyy" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.linkedin.com/in/rafaely-ramos/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="social" href="https://www.instagram.com/studio.elyy" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+            <a class="social" href="https://www.linkedin.com/in/rafaely-ramos/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7.8 10.7v5.5"/><circle cx="7.8" cy="7.9" r="1" fill="currentColor" stroke="none"/><path d="M11.7 16.2v-5.5m0 2.6a2.6 2.6 0 015.2 0v2.9"/></svg>LinkedIn</a>
           </div>
         </div>
       </div>
@@ -721,50 +726,52 @@
   const ARW = '<span class="arw">&#8594;</span>';
   const i18n = {
     pt:{
-      navWork:"Trabalhos", navAbout:"Sobre", navContactShort:"Contato",
+      navSvc:"Serviços", navWork:"Trabalhos", navAbout:"Sobre", navContactShort:"Contato",
       navContact:"Falar comigo"+ARW,
-      heroEyebrow:"Brand designer & marketing · 8 anos",
       heroTitle:'Comunicação é<br>a minha <em>arte.</em>',
       heroSub:"Sou a Rafa. Construo marcas que <b>existem com consistência</b> em qualquer canal — do símbolo à campanha, do feed à landing page.",
       ctaWork:"Ver trabalhos"+ARW,
       ctaTalk:"Falar comigo"+ARW,
-      f1a:"Identidade visual", f1b:"do símbolo ao manual",
-      f2a:"Campanhas", f2b:"conceito e desdobramento",
-      f3a:"Social media", f3b:"estratégia e criação",
-      f4a:"Landing pages", f4b:"design que converte",
-      workEyebrow:"Selecionados",
-      workTitle:"Marcas que passaram pelas minhas mãos",
+      svcEyebrow:"O que eu faço",
+      svcTitle:"Serviços",
+      s1t:"Identidade visual", s1d:"Símbolo, paleta, tipografia e manual de marca. O sistema completo pra sua marca ser reconhecida em qualquer lugar.",
+      s2t:"Campanhas", s2d:"Do conceito à peça final. Uma ideia que se desdobra com coerência em todos os canais onde a marca aparece.",
+      s3t:"Social media", s3d:"Estratégia de conteúdo, criação e calendário. Presença constante no feed, com propósito e não por obrigação.",
+      s4t:"Landing pages", s4d:"Design e construção de páginas pensadas pra converter visita em conversa e conversa em cliente.",
+      s5t:"E-mail marketing", s5d:"Réguas e disparos que as pessoas realmente abrem, com o mesmo cuidado visual do resto da marca.",
+      workTitle:"Feitos aqui",
       aboutLabel:"Sobre mim",
       aboutTitle:"Design com propósito, entregue com cuidado.",
       aboutSub:"Prazer, sou a Rafa, designer há mais de 8 anos.",
       aboutP1:"Minha história nesse ramo começou cedo, muito antes de eu saber que tinha nome. Sempre gostei de edição e criava artes do zero por pura intuição. Na adolescência, comecei a criar peças para a minha igreja local como voluntária e foi ali que tudo fez sentido, descobri que <b>design era minha aptidão.</b>",
       aboutP2:"Desde então, entendi que design não é só beleza: ele é <b>estratégico, consistente e precisa fazer sentido pra quem o vê;</b> e para isso, você pode contar comigo!",
       contactEyebrow:"Próximo projeto",
-      contactTitle:'Vamos construir a sua <em>marca?</em>',
+      contactTitle:'Vamos <em>conversar</em>',
       contactBtn:"Chamar no WhatsApp"+ARW,
       countSuffix:{one:"projeto",many:"projetos"}, saveBtn:"Ver projeto"
     },
     en:{
-      navWork:"Work", navAbout:"About", navContactShort:"Contact",
+      navSvc:"Services", navWork:"Work", navAbout:"About", navContactShort:"Contact",
       navContact:"Get in touch"+ARW,
-      heroEyebrow:"Brand designer & marketing · 8 years",
       heroTitle:'Communication is<br>my <em>craft.</em>',
       heroSub:"I'm Rafa. I build brands that <b>show up consistently</b> on every channel — from the mark to the campaign, from the feed to the landing page.",
       ctaWork:"View work"+ARW,
       ctaTalk:"Get in touch"+ARW,
-      f1a:"Visual identity", f1b:"from mark to guidelines",
-      f2a:"Campaigns", f2b:"concept and rollout",
-      f3a:"Social media", f3b:"strategy and creative",
-      f4a:"Landing pages", f4b:"design that converts",
-      workEyebrow:"Selected",
-      workTitle:"Brands that came through my hands",
+      svcEyebrow:"What I do",
+      svcTitle:"Services",
+      s1t:"Visual identity", s1d:"Mark, palette, type and brand guidelines. The full system so your brand is recognised anywhere.",
+      s2t:"Campaigns", s2d:"From concept to final artwork. One idea that unfolds coherently across every channel the brand shows up in.",
+      s3t:"Social media", s3d:"Content strategy, creative and calendar. A steady presence in the feed, with purpose rather than obligation.",
+      s4t:"Landing pages", s4d:"Design and build of pages made to turn a visit into a conversation, and a conversation into a client.",
+      s5t:"Email marketing", s5d:"Flows and sends people actually open, with the same visual care as the rest of the brand.",
+      workTitle:"Made here",
       aboutLabel:"About me",
       aboutTitle:"Design with purpose, delivered with care.",
       aboutSub:"I'm Rafa, a designer with over 8 years in the field.",
       aboutP1:"My story here started early, long before I knew it had a name. I always loved editing and made artwork from scratch on pure instinct. As a teenager I began designing for my local church as a volunteer, and that's when it clicked — I found out <b>design was my calling.</b>",
       aboutP2:"Since then I've understood that design isn't only about beauty: it's <b>strategic, consistent, and has to make sense to whoever sees it</b> — and that's where I come in.",
       contactEyebrow:"Next project",
-      contactTitle:'Let\'s build your <em>brand?</em>',
+      contactTitle:'Let\'s <em>talk</em>',
       contactBtn:"Message on WhatsApp"+ARW,
       countSuffix:{one:"project",many:"projects"}, saveBtn:"View project"
     }
