@@ -251,14 +251,6 @@
   }
   .about-text p{color:var(--text-soft);font-size:.95rem;line-height:1.6;margin-bottom:.85rem;max-width:52ch}
   .about-text p b{font-weight:600;color:var(--text)}
-  .about-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
-  .about-tag{
-    font-size:.74rem;font-weight:600;padding:.3rem .7rem;border-radius:100px;
-    background:var(--bg);color:var(--text-soft);
-    opacity:0;transform:translateY(6px);
-    transition:opacity .4s var(--ease),transform .4s var(--ease);
-  }
-  .about-tag.in{opacity:1;transform:none}
   .about-photo{position:relative;min-height:clamp(320px,42vw,560px)}
   .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
 
@@ -436,7 +428,6 @@
           <h2 data-i18n="aboutTitle"></h2>
           <p data-i18n="aboutP1"></p>
           <p data-i18n="aboutP2"></p>
-          <div class="about-tags" id="about-tags"></div>
         </div>
         <div class="about-photo">
           <img src="sobre-mim.jpg" alt="Rafaely Almeida">
@@ -670,7 +661,7 @@
       s1t:"Identidade visual", s1d:"É o conjunto de elementos que faz uma marca ser reconhecida e lembrada, muito além de um logo bonito. Toda marca que quer ser levada a sério precisa desse sistema visual consistente, porque é isso que cria confiança e diferencia ela da concorrência.",
       s2t:"Social media", s2d:"Estratégia de conteúdo, criação e calendário. Organizo a presença da marca no feed com direção e consistência, sem depender de inspiração do dia.",
       s3t:"Landing pages", s3d:"Design e construção de páginas pensadas pra vender: estrutura clara e foco no que o visitante precisa saber pra decidir.",
-      s4t:"E muito mais", s4d:"Esses são só os serviços mais recorrentes. Trabalho também com campanhas, e-mail marketing, apresentações, materiais gráficos e outras demandas de marca. Me chama que a gente vê o que faz sentido pro seu projeto.",
+      s4t:"E muito mais", s4d:"Esses são só os serviços mais recorrentes. Trabalho também com design de posts, e-mail marketing, apresentações, materiais gráficos e outras demandas de marca. Me chama que a gente vê o que faz sentido pro seu projeto.",
       workTitle:"Feitos aqui",
       aboutLabel:"Sobre mim",
       aboutTitle:'Prazer, Rafa<em>(ely)</em>.',
@@ -692,7 +683,7 @@
       s1t:"Visual identity", s1d:"It's the set of elements that makes a brand recognisable and memorable, far beyond a good-looking logo. Any brand that wants to be taken seriously needs that consistent visual system, because it's what builds trust and sets it apart from the competition.",
       s2t:"Social media", s2d:"Content strategy, creative and calendar. I organise the brand's presence in the feed with direction and consistency, without depending on the inspiration of the day.",
       s3t:"Landing pages", s3d:"Design and build of pages made to sell: clear structure and focus on what the visitor needs to know in order to decide.",
-      s4t:"And much more", s4d:"These are just the most frequent services. I also work with campaigns, email marketing, presentations, print materials and other brand needs. Message me and we'll figure out what makes sense for your project.",
+      s4t:"And much more", s4d:"These are just the most frequent services. I also work with post design, email marketing, presentations, print materials and other brand needs. Message me and we'll figure out what makes sense for your project.",
       workTitle:"Made here",
       aboutLabel:"About me",
       aboutTitle:'Nice to meet you, Rafa<em>(ely)</em>.',
@@ -725,24 +716,7 @@
       const v=i18n[l][k];
       if(v!=null) el.innerHTML=v;
     });
-    renderFilters(); renderGrid(); renderTags(l);
-  }
-
-  /* ---------- tags sobre ---------- */
-  const tags = {
-    pt:["Identidade Visual","Branding","Design Gráfico","Web Design","Campanhas","Redes Sociais","Landing Pages","Peças Offline"],
-    en:["Visual Identity","Branding","Graphic Design","Web Design","Campaigns","Social Media","Landing Pages","Offline Materials"]
-  };
-  function renderTags(l){
-    const box=document.getElementById("about-tags");
-    if(!box) return;
-    box.innerHTML="";
-    tags[l].forEach(t=>{
-      const s=document.createElement("span");
-      s.className="about-tag";
-      s.textContent=t;
-      box.appendChild(s);
-    });
+    renderFilters(); renderGrid();
   }
 
   /* ---------- filtros ---------- */
@@ -800,21 +774,6 @@
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");obIO.unobserve(e.target);}});
   },{threshold:.1});
   document.querySelectorAll(".ob").forEach(el=>obIO.observe(el));
-
-  /* tags — escalonadas */
-  const tagIO=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.querySelectorAll(".about-tag").forEach((t,i)=>{
-          t.style.transitionDelay=(i*.04)+"s";
-          t.classList.add("in");
-        });
-        tagIO.unobserve(e.target);
-      }
-    });
-  },{threshold:.2});
-  const tagsEl=document.getElementById("about-tags");
-  if(tagsEl) tagIO.observe(tagsEl);
 
   /* ---------- overlay de projeto ---------- */
   const overlay=document.getElementById("projOverlay");
