@@ -32,7 +32,6 @@
     --on-accent:#FFF7CD;
     --ink:48,30,13;             /* RGB de --text: base dos fios e realces */
 
-    --hairline:rgba(var(--ink),.12);
     --hairline-soft:rgba(var(--ink),.07);
 
     --r-shell:30px;             /* a moldura */
@@ -55,7 +54,6 @@
     --gold:#E8BC63;
     --on-accent:#2A1A0A;
     --ink:255,247,205;
-    --hairline:rgba(var(--ink),.14);
     --hairline-soft:rgba(var(--ink),.08);
   }
 
@@ -171,24 +169,6 @@
     letter-spacing:-.032em;line-height:1.04;margin-bottom:.55rem;
   }
   .svc p{font-size:.87rem;color:var(--muted);line-height:1.5}
-
-  /* ---------- Marcas ---------- */
-  .brands{
-    margin-top:clamp(44px,5.4vw,78px);padding:clamp(20px,2.4vw,30px) 0 0;
-    border-top:1px solid var(--hairline);
-    position:relative;overflow:hidden;
-    mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
-  }
-  .brands-track{display:flex;width:max-content;align-items:center;gap:clamp(38px,5vw,74px);animation:slide 34s linear infinite}
-  .brands:hover .brands-track{animation-play-state:paused}
-  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .brand-ph{
-    flex-shrink:0;white-space:nowrap;
-    font-size:.95rem;font-weight:600;color:var(--muted);
-    letter-spacing:-.01em;
-  }
-  .brand-logo{height:clamp(22px,2.4vw,30px);width:auto;flex-shrink:0;filter:grayscale(1) opacity(.42)}
 
   /* ---------- Cabeçalho de seção ---------- */
   .section{padding-block:clamp(52px,7vw,110px)}
@@ -381,7 +361,6 @@
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
     .card,.ob{opacity:1;transform:none}
-    .brands-track{flex-wrap:wrap;width:auto;justify-content:center}
   }
 </style>
 </head>
@@ -421,10 +400,6 @@
       <div class="hero-actions">
         <a href="#trabalhos" class="btn btn-primary btn-lg" data-i18n-html="ctaWork"></a>
         <a href="#contato" class="btn btn-ghost btn-lg" data-i18n-html="ctaTalk"></a>
-      </div>
-
-      <div class="brands" aria-label="Marcas com quem já trabalhei">
-        <div class="brands-track" id="brandsTrack"></div>
       </div>
     </section>
 
@@ -669,43 +644,6 @@
     },
   ];
 
-  /* ---------------------------------------------------------------------
-     MARCAS DO CARROSSEL (hero)
-     Para usar o logo real: troque `ph:"Nome"` por `img:"logos/nome.svg"`.
-     Ideal: SVG ou PNG transparente, altura ~80px, monocromático.
-     --------------------------------------------------------------------- */
-  const brands = [
-    {name:"Quero Bolsa", ph:"Quero Bolsa"},
-    {name:"Swift", ph:"Swift"},
-    {name:"Igreja Batista Mais 500", ph:"Mais 500"},
-    {name:"Prosper", ph:"Prosper"},
-    {name:"LC Consultoria", ph:"LC Consultoria"},
-    {name:"Preparadão Enem", ph:"Preparadão Enem"},
-    {name:"Agência Maker Up", ph:"Maker Up"},
-  ];
-
-  function renderBrands(){
-    const track=document.getElementById("brandsTrack");
-    if(!track) return;
-    track.innerHTML="";
-    /* duas voltas da lista = loop sem emenda (a animação anda 50%) */
-    for(let pass=0; pass<2; pass++){
-      brands.forEach(b=>{
-        let el;
-        if(b.img){
-          el=document.createElement("img");
-          el.className="brand-logo"; el.src=b.img; el.alt=pass===0?b.name:"";
-          el.loading="lazy";
-        } else {
-          el=document.createElement("span");
-          el.className="brand-ph"; el.textContent=b.ph||b.name;
-        }
-        if(pass===1) el.setAttribute("aria-hidden","true");
-        track.appendChild(el);
-      });
-    }
-  }
-
   /* Rótulos das categorias (PT/EN) */
   const catLabels = {
     all:{pt:"Tudo",en:"All"},
@@ -914,7 +852,6 @@
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeProject()});
 
   setLang("pt");
-  renderBrands();
 </script>
 </body>
 </html>
